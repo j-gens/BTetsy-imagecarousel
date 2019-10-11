@@ -1,9 +1,9 @@
 const express = require('express');
-let port = 1028;
-let app = express();
 const parser = require('body-parser');
-app.use(parser.json());
 const models = require('./models/index.js');
+const port = 3000;
+const app = express();
+app.use(parser.json());
 
 //get the names and pics of the products
 app.get('/products', function (req, res) {
@@ -18,8 +18,8 @@ app.get('/products', function (req, res) {
 
 //add product name, url, and username
 app.post('/products', function (req, res) {
-  models.saveProduct(req.body.productItem, req.body.pictureUrl, req.body.username);
-  res.end('am i dead yet?');
+  models.saveProduct(req.body.productItem, req.body.pictureUrl);
+  res.end('done');
 });
 
 //getting item and username from wishlist
@@ -36,8 +36,7 @@ app.get('/wishlists', function (req, res) {
 //adding product name and username to wishlist
 app.post('/wishlists', function (req, res) {
   models.saveWishlist(req.body.products, req.body.username);
-
-  res.end('am i dead now?');
+  res.end('finished');
 });
 
 //get individual product item
@@ -51,9 +50,7 @@ app.get('/products/:productItem', function (req, res) {
   });
 });
 //getting individual wishlist
-//why am i still alive...
 app.get('/wishlists/:username', function (req, res) {
-  //(productItem, callback)
   models.getWishlistByUsername(req.params.username, (err, data) => {
     if (err) {
       throw err;
@@ -63,5 +60,5 @@ app.get('/wishlists/:username', function (req, res) {
   });
 });
 app.listen(port, function() {
-  console.log(`waiting for death @ ${port}`);
+  console.log(`listening to ${port}`);
 });

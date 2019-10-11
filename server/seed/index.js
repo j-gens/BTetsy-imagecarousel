@@ -2,20 +2,20 @@ var faker = require('faker');
 const models = require('../models/index.js');
 
 let productSeed = () => {
-  for (let i = 0; i < 10; i++) {
-    var randomUsername = faker.internet.userName();
-
+  for (let i = 0; i < 20; i++) {
     var randomProductItem = faker.commerce.productName();
-
-    var randomArray = [faker.image.fashion(), faker.image.cats(), faker.image.animals()];
-    var randomPic = Math.floor(Math.random() * 3);
-    var randomNumber = Math.floor(Math.random() * 4);
+    var randomArray = [faker.image.fashion(), faker.image.cats(), faker.image.technics(), faker.image.transport(), faker.image.abstract()];
     var productArray = [];
 
-    for (let i = 0; i < randomNumber + 1; i++) {
-      productArray.push(randomArray[randomPic]);
+    var randomNum = (max) => {
+      return Math.floor(Math.random() * max);
+    };
+    var randomNumUpTo4 = randomNum(4);
+
+    for (let i = 0; i < randomNum(4) + 1; i++) {
+      productArray.push(randomArray[randomNumUpTo4]);
     }
-    models.saveProduct(randomProductItem, productArray, randomUsername);
+    models.saveProduct(randomProductItem, productArray);
   }
 };
 

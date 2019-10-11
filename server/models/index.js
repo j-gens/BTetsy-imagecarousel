@@ -5,8 +5,6 @@ mongoose.connect('mongodb://localhost/BTetsy', {
   useUnifiedTopology: true
 });
 
-const Schema = mongoose.Schema;
-const ObjectId = Schema.ObjectId;
 
 const Product = mongoose.Schema({
   productItem: String,
@@ -26,7 +24,7 @@ let saveProduct = (productItem, pictureUrl, username) => {
   const instance = new MyProductsModel({
     productItem: productItem,
     pictureUrl: pictureUrl,
-    usename: username
+    username: username
   });
   instance.save((err) => {
     if (!err) {
