@@ -23,9 +23,6 @@ const MyWishlistModel = mongoose.model('Wishlist', Wishlist);
 
 //save 1 product
 let saveProduct = (productItem, pictureUrl, username) => {
-  // TODO: Your code here
-  // This function should save a repo or repos to
-  // the MongoDB
   const instance = new MyProductsModel({
     productItem: productItem,
     pictureUrl: pictureUrl,
@@ -39,9 +36,6 @@ let saveProduct = (productItem, pictureUrl, username) => {
 };
 
 let saveWishlist = (products, username) => {
-  // TODO: Your code here
-  // This function should save a repo or repos to
-  // the MongoDB
   const instance = new MyWishlistModel({
     products: products,
     username: username

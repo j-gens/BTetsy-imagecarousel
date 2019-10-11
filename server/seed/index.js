@@ -8,7 +8,7 @@ var randomProductName = faker.commerce.productName();
 // console.log('randomProductName', randomProductName);//Practical Soft Towels
 //url images of those product names
 var randomImageUrl = faker.image.fashion();
-// console.log('randomImageUrl', randomImageUrl);//http://lorempixel.com/640/480/fashion
+// console.log('randomImageUrl', randomImageUrl);//http://lorempixel.com/640/480/fashion <=this is depression
 
 
 var productArray = [];
