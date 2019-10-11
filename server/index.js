@@ -1,5 +1,5 @@
 const express = require('express');
-let port = 3000;
+let port = 1028;
 let app = express();
 const parser = require('body-parser');
 app.use(parser.json());
@@ -18,7 +18,6 @@ app.get('/products', function (req, res) {
 
 //add product name, url, and username
 app.post('/products', function (req, res) {
-  // (productItem, pictureUrl, username)
   models.saveProduct(req.body.productItem, req.body.pictureUrl, req.body.username);
   res.end('am i dead yet?');
 });
@@ -36,7 +35,6 @@ app.get('/wishlists', function (req, res) {
 
 //adding product name and username to wishlist
 app.post('/wishlists', function (req, res) {
-  // (productItem, pictureUrl, username)
   models.saveWishlist(req.body.products, req.body.username);
 
   res.end('am i dead now?');
@@ -44,7 +42,6 @@ app.post('/wishlists', function (req, res) {
 
 //get individual product item
 app.get('/products/:productItem', function (req, res) {
-  //(productItem, callback)
   models.getProductByName(req.params.productItem, (err, data) => {
     if (err) {
       throw err;

@@ -1,14 +1,22 @@
 var faker = require('faker');
-const models = require('./models/index.js');
-//usernames
-var randomUsername = faker.internet.userName();
-// console.log('randomUsername', randomUsername);//Elton_Hauck
-//product names
-var randomProductName = faker.commerce.productName();
-// console.log('randomProductName', randomProductName);//Practical Soft Towels
-//url images of those product names
-var randomImageUrl = faker.image.fashion();
-// console.log('randomImageUrl', randomImageUrl);//http://lorempixel.com/640/480/fashion <=this is depression
+const models = require('../models/index.js');
 
+let productSeed = () => {
+  for (let i = 0; i < 10; i++) {
+    var randomUsername = faker.internet.userName();
 
-var productArray = [];
+    var randomProductItem = faker.commerce.productName();
+
+    var randomArray = [faker.image.fashion(), faker.image.cats(), faker.image.animals()];
+    var randomPic = Math.floor(Math.random() * 3);
+    var randomNumber = Math.floor(Math.random() * 4);
+    var productArray = [];
+
+    for (let i = 0; i < randomNumber + 1; i++) {
+      productArray.push(randomArray[randomPic]);
+    }
+    models.saveProduct(randomProductItem, productArray, randomUsername);
+  }
+};
+
+productSeed();
