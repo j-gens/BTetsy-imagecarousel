@@ -7,9 +7,9 @@ mongoose.connect('mongodb://localhost/BTetsy', {
 
 
 const Product = mongoose.Schema({
+  productId: {type: Number, unique: true},
   productItem: String,
-  pictureUrl: Array,
-  username: String
+  pictureUrl: Array
 });
 const Wishlist = mongoose.Schema({
   products: Array,
@@ -20,11 +20,11 @@ const MyProductsModel = mongoose.model('Product', Product);
 const MyWishlistModel = mongoose.model('Wishlist', Wishlist);
 
 //save 1 product
-let saveProduct = (productItem, pictureUrl, username) => {
+let saveProduct = (productId, productItem, pictureUrl) => {
   const instance = new MyProductsModel({
+    productId: productId,
     productItem: productItem,
-    pictureUrl: pictureUrl,
-    username: username
+    pictureUrl: pictureUrl
   });
   instance.save((err) => {
     if (!err) {
@@ -44,9 +44,9 @@ let saveWishlist = (products, username) => {
     }
   });
 };
-//get all the products
+
 let getProducts = (callback) => {
-  MyProductsModel.find({}, (err, docs) => {
+  MyProductsModel.find({}).sort([['productId', 'ascending']]).exec(function (err, docs) {
     callback(err, docs);
   });
 };
@@ -56,8 +56,8 @@ let getWishlists = (callback) => {
   });
 };
 //get product by name
-let getProductByName = (productItem, callback) => {
-  MyProductsModel.find({productItem: productItem}, (err, docs) => {
+let getProductByName = (productId, callback) => {
+  MyProductsModel.find({productId: productId}, (err, docs) => {
     callback(err, docs);
   });
 };

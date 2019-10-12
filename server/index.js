@@ -5,6 +5,7 @@ const port = 3000;
 const app = express();
 app.use(parser.json());
 
+app.use(express.static(__dirname + '/../dist'))
 //get the names and pics of the products
 app.get('/products', function (req, res) {
   models.getProducts((err, data) => {
@@ -18,7 +19,7 @@ app.get('/products', function (req, res) {
 
 //add product name, url, and username
 app.post('/products', function (req, res) {
-  models.saveProduct(req.body.productItem, req.body.pictureUrl);
+  models.saveProduct(req.body.productId, req.body.productItem, req.body.pictureUrl);
   res.end('done');
 });
 
@@ -40,8 +41,8 @@ app.post('/wishlists', function (req, res) {
 });
 
 //get individual product item
-app.get('/products/:productItem', function (req, res) {
-  models.getProductByName(req.params.productItem, (err, data) => {
+app.get('/products/:productId', function (req, res) {
+  models.getProductByName(req.params.productId, (err, data) => {
     if (err) {
       throw err;
     } else {
@@ -62,3 +63,4 @@ app.get('/wishlists/:username', function (req, res) {
 app.listen(port, function() {
   console.log(`listening to ${port}`);
 });
+module.exports.app = app;

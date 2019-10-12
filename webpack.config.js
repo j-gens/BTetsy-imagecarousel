@@ -1,6 +1,6 @@
 
 module.exports = {
-
+  entry: './client/components/app.jsx',
   module: {
     rules: [
       {
@@ -10,7 +10,7 @@ module.exports = {
         ],
         use: {
           loader: "babel-loader"
-        }//run babel-loader for any js or jsx files
+        }
       }
     ]
   }
