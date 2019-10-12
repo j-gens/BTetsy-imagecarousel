@@ -1,4 +1,4 @@
-
+import css from 'file.css';
 module.exports = {
   entry: './client/components/app.jsx',
   module: {
@@ -9,7 +9,7 @@ module.exports = {
           /node_modules/
         ],
         use: {
-          loader: "babel-loader"
+          loader: ['babel-loader', 'css-loader']
         }
       }
     ]
