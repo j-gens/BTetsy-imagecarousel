@@ -6,7 +6,7 @@ import style from './style.js';
 //fa-2x gives me the size
 const LeftArrow = (props) => (
   <div className="leftArrow arrow" onClick={props.prevPicture} style={style.leftArrow}>
-    <i className="fa fa-angle-left fa-3x" aria-hidden="true"></i>
+    <i className="fa fa-angle-left fa-3x" aria-hidden="true" style={style.arrow}></i>
   </div>
 );
 

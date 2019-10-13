@@ -8,7 +8,7 @@ const exampleStyle = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: '#f9f9f9',
+    background: 'white',
     borderRadius: '50%',
     cursor: 'pointer',
     transition: 'transform ease-in .1s'
@@ -23,7 +23,7 @@ const exampleStyle = {
   rightArrow: {
     position: 'absolute',
     top: '50%',
-    right: '2%',
+    right: '10%',
     height: '30px',
     width: '30px'
   },
