@@ -1,6 +1,6 @@
-
+import css from 'file.css';
 module.exports = {
-
+  entry: './client/components/app.jsx',
   module: {
     rules: [
       {
@@ -9,8 +9,8 @@ module.exports = {
           /node_modules/
         ],
         use: {
-          loader: "babel-loader"
-        }//run babel-loader for any js or jsx files
+          loader: ['babel-loader', 'css-loader']
+        }
       }
     ]
   }
