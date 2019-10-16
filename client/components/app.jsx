@@ -3,6 +3,7 @@ import ReactDom from 'react-dom';
 import axios from 'axios';
 import style from './style.js';
 import CarouselPic from './carousel.jsx';
+import DisplayPic from './display.jsx'
 import LeftArrow from './leftArrow.jsx';
 import RightArrow from './rightArrow.jsx';
 
@@ -68,8 +69,8 @@ class App extends React.Component {
               transform: `translateX(${this.state.translateVal}px)`,
               transition: 'transform ease-out 0.45s'
             }}>
-            {this.state.images.map((image, index) => (<CarouselPic key={index} image={image} />
-            ))}
+            {this.state.images.map((image, index) => (<CarouselPic key={index} image={image} />)
+            )}
           </div>
 
           <LeftArrow
@@ -79,7 +80,18 @@ class App extends React.Component {
           <RightArrow
             nextPicture={this.nextPicture}
           />
+
+          <div className="displayList">
+            <ul className="pictureList" style={{listStyleType: 'none'}}>
+              {this.state.images.map((image, index) =>
+                (<DisplayPic key={index} image={image}/>)
+              )}
+            </ul>
+          </div>
         </div>
+
+
+
       </div>
     );
   }

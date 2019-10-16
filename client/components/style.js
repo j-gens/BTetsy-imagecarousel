@@ -49,6 +49,14 @@ const exampleStyle = {
     display: 'inline-block',
     height: '100%',
     width: '100%'
+  },
+  listPic: {
+    position: 'relative',
+    float: 'left'
+  },
+  eachPic: {
+    width: '60px',
+    height: '60px'
   }
 };
 export default exampleStyle;
