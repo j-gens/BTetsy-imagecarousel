@@ -1,10 +1,9 @@
 import React from 'react';
 
-const CarouselItem = (props) => {
-
+const CarouselPic = (props) => {
   return (
 
-    <div className="carouselItem" style={{
+    <div className="carouselPic" id="carouselPic" style={{
       backgroundImage: `url(${props.image})`,
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
@@ -14,12 +13,10 @@ const CarouselItem = (props) => {
       position: 'relative',
       float: 'left'
     }}>
-
     </div>
-
   );
 };
 
 
 
-export default CarouselItem;
+export default CarouselPic;

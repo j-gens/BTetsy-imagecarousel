@@ -5,7 +5,7 @@ const port = 3000;
 const app = express();
 app.use(parser.json());
 
-app.use(express.static(__dirname + '/../dist'))
+app.use(express.static(__dirname + '/../dist'));
 //get the names and pics of the products
 app.get('/products', function (req, res) {
   models.getProducts((err, data) => {
@@ -42,7 +42,7 @@ app.post('/wishlists', function (req, res) {
 
 //get individual product item
 app.get('/products/:productId', function (req, res) {
-  models.getProductByName(req.params.productId, (err, data) => {
+  models.getProductById(req.params.productId, (err, data) => {
     if (err) {
       throw err;
     } else {
@@ -54,7 +54,7 @@ app.get('/products/:productId', function (req, res) {
 app.get('/wishlists/:username', function (req, res) {
   models.getWishlistByUsername(req.params.username, (err, data) => {
     if (err) {
-      throw err;
+      console.error('this is an error in getting username of wishlists');
     } else {
       res.send(data);
     }

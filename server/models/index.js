@@ -45,18 +45,16 @@ let saveWishlist = (products, username) => {
   });
 };
 
-let getProducts = (callback) => {
-  MyProductsModel.find({}).sort([['productId', 'ascending']]).exec(function (err, docs) {
-    callback(err, docs);
-  });
+let getProducts = async (callback) => {
+
+  return await MyProductsModel.find({}).sort([['productId', 'ascending']]).exec();
 };
-let getWishlists = (callback) => {
-  MyWishlistModel.find({}, (err, docs) => {
-    callback(err, docs);
-  });
+
+let getWishlists = async (callback) => {
+  return await MyWishlistModel.find({});
 };
 //get product by name
-let getProductByName = (productId, callback) => {
+let getProductById = (productId, callback) => {
   MyProductsModel.find({productId: productId}, (err, docs) => {
     callback(err, docs);
   });
@@ -70,5 +68,5 @@ module.exports.saveProduct = saveProduct;
 module.exports.saveWishlist = saveWishlist;
 module.exports.getProducts = getProducts;
 module.exports.getWishlists = getWishlists;
-module.exports.getProductByName = getProductByName;
+module.exports.getProductById = getProductById;
 module.exports.getWishlistByUsername = getWishlistByUsername;
