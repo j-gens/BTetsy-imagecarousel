@@ -3,7 +3,7 @@ import ReactDom from 'react-dom';
 import axios from 'axios';
 import style from './style.js';
 import CarouselPic from './carousel.jsx';
-import DisplayPic from './display.jsx'
+import DisplayPic from './display.jsx';
 import LeftArrow from './leftArrow.jsx';
 import RightArrow from './rightArrow.jsx';
 
@@ -97,7 +97,5 @@ class App extends React.Component {
   }
 }
 
-ReactDom.render(<App/>,
-  document.getElementById('app')
-);
+
 export default App;
