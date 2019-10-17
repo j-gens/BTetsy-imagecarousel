@@ -34,8 +34,9 @@ const exampleStyle = {
   },
   carousel: {
     position: 'relative',
-    width: '400px',
-    height: '500px',
+    width: '500px',
+    height: '700px',
+    right: '25%',
     margin: '0 auto',
     overflow: 'hidden',
     whiteSpace: 'nowrap',
@@ -55,8 +56,21 @@ const exampleStyle = {
     float: 'left'
   },
   eachPic: {
-    width: '60px',
-    height: '60px'
+    width: '70px',
+    height: '70px'
+  },
+  carouselPic: {
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: '50% 60%',
+    width: '500px',
+    height: '500px',
+    position: 'relative',
+    float: 'left'
+  },
+  carouselWrapper: {
+    display: 'inline-flex',
+    transition: 'transform ease-out 0.45s'
   }
 };
 export default exampleStyle;

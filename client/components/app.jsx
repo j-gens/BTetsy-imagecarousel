@@ -22,20 +22,20 @@ class App extends React.Component {
     };
     this.nextPicture = this.nextPicture.bind(this);
     this.prevPicture = this.prevPicture.bind(this);
+    this.selectedPicture = this.selectedPicture.bind(this);
   }
 
   carouselWidth () {
-    // var pic = document.getElementById('carouselPic');
-    // return pic.clientWidth;
-    return 400;
+    var pic = document.getElementById('carouselPic');
+    return pic.clientWidth;
   }
 
   prevPicture() {
-    const lengthOfImages = this.state.images.length - 1;
+    const imagesLength = this.state.images.length - 1;
     this.state.currIndex === 0 ?
       this.setState(state => ({
-        currIndex: lengthOfImages,
-        translateVal: -(lengthOfImages) * (this.carouselWidth())
+        currIndex: imagesLength,
+        translateVal: -(imagesLength) * (this.carouselWidth())
       }))
       :
       this.setState(state => ({
@@ -45,9 +45,8 @@ class App extends React.Component {
   }
 
   nextPicture() {
-    const lengthOfImages = this.state.images.length - 1;
-
-    this.state.currIndex === lengthOfImages ?
+    const imagesLength = this.state.images.length - 1;
+    this.state.currIndex === imagesLength ?
       this.setState({
         currIndex: 0,
         translateVal: 0
@@ -59,15 +58,23 @@ class App extends React.Component {
       }));
   }
 
+  selectedPicture(event) {
+    var selectedImg = Number(event.target.id);
+    this.setState(state => ({
+      currIndex: selectedImg,
+      translateVal: -(this.carouselWidth() * selectedImg)
+    }));
+  }
+
   render () {
     return (
       <div>
         <h3 style={style.header}>{this.state.itemName}</h3>
         <div className="carousel" style={style.carousel}>
           <div className="carouselWrapper"
-            style={{display: 'inline-flex',
+            style={{
               transform: `translateX(${this.state.translateVal}px)`,
-              transition: 'transform ease-out 0.45s'
+              ...style.carouselWrapper
             }}>
             {this.state.images.map((image, index) => (<CarouselPic key={index} image={image} />)
             )}
@@ -84,7 +91,7 @@ class App extends React.Component {
           <div className="displayList">
             <ul className="pictureList" style={{listStyleType: 'none'}}>
               {this.state.images.map((image, index) =>
-                (<DisplayPic key={index} image={image}/>)
+                (<DisplayPic key={index} index={index} image={image} selectedPicture={this.selectedPicture}/>)
               )}
             </ul>
           </div>
