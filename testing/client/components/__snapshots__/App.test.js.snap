@@ -1,3 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<LeftArrow/> It renders a left button in the navaigation bar 1`] = `ReactWrapper {}`;
+
+exports[`<RightArrow/> It renders a right button in the navaigation bar 1`] = `ReactWrapper {}`;
+
 exports[`App should render correctly in "debug" mode 1`] = `ShallowWrapper {}`;

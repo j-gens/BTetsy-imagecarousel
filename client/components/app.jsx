@@ -25,13 +25,13 @@ class App extends React.Component {
   }
 
   carouselWidth () {
-    var pic = document.getElementById('carouselPic');
-    return pic.clientWidth;
+    // var pic = document.getElementById('carouselPic');
+    // return pic.clientWidth;
+    return 400;
   }
 
   prevPicture() {
     const lengthOfImages = this.state.images.length - 1;
-
     this.state.currIndex === 0 ?
       this.setState(state => ({
         currIndex: lengthOfImages,

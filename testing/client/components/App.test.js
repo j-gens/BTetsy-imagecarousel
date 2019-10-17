@@ -28,3 +28,38 @@ describe('<CarouselPic />', () => {
   });
 });
 
+describe('<LeftArrow/>', () => {
+  test('It renders a left button in the navaigation bar', () => {
+    let wrapper = Enzyme.mount(<LeftArrow/>);
+    // console.log('get the function, \n', wrapper.getElement('.leftArrow').type);
+    expect(LeftArrow).toBeDefined();
+    expect(wrapper).toMatchSnapshot();
+    expect(typeof(wrapper.getElement('.leftArrow').type)).toBe('function');
+  });
+
+  test('It renders a left button that displays the previous picture in the item carousel', () => {
+    let wrapper = Enzyme.mount(<App/>);
+    // console.log('whats the state of the picture?', wrapper.state('currIndex'));
+    // console.log(wrapper.find('carousel'));
+    expect(wrapper.state('currIndex')).toBe(0);
+    wrapper.find('LeftArrow').simulate('click');
+    expect(wrapper.state('currIndex')).toBe(2);
+  });
+});
+
+describe('<RightArrow/>', () => {
+  test('It renders a right button in the navaigation bar', () => {
+    let wrapper = Enzyme.mount(<RightArrow/>);
+
+    expect(RightArrow).toBeDefined();
+    expect(wrapper).toMatchSnapshot();
+    expect(typeof(wrapper.getElement('.RightArrow').type)).toBe('function');
+  });
+
+  test('It renders a right button that displays the previous picture in the item carousel', () => {
+    let wrapper = Enzyme.mount(<App/>);
+    expect(wrapper.state('currIndex')).toBe(0);
+    wrapper.find('RightArrow').simulate('click');
+    expect(wrapper.state('currIndex')).toBe(1);
+  });
+});
