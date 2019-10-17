@@ -41,19 +41,19 @@ let saveWishlist = async (products, username) => {
   return await instance.save();
 };
 
-let getProducts = async (callback) => {
+let getProducts = async () => {
   return await MyProductsModel.find({}).sort([['productId', 'ascending']]).exec();
 };
 
-let getWishlists = async (callback) => {
+let getWishlists = async () => {
   return await MyWishlistModel.find({});
 };
 //get product by id
-let getProductById = async (productId, callback) => {
+let getProductById = async (productId) => {
   return await MyProductsModel.find({productId: productId});
 };
 //get wishlist by username
-let getWishlistByUsername = async (username, callback) => {
+let getWishlistByUsername = async (username) => {
   return await MyWishlistModel.find({username: username});
 };
 module.exports.saveProduct = saveProduct;

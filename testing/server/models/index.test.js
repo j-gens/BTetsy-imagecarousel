@@ -16,7 +16,6 @@ describe('Product Model', () => {
 
   test('it should retrieve product data by id from the database', async () => {
     let result = await productModel.getProductById(1);
-
     expect(result).toBeDefined();
     expect(result[0].pictureUrl.length).toBe(3);
     expect(result[0].productItem).toBe('BTS BT21 Official Pyjamas Set');
