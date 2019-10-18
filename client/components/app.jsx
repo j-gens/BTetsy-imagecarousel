@@ -26,7 +26,19 @@ class App extends React.Component {
     this.prevPicture = this.prevPicture.bind(this);
     this.selectedPic = this.selectedPic.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
   }
+
+  componentDidMount() {
+    axios.get('/products/2')
+    .then((results) => {
+      this.setState({images: results.data[0].pictureUrl})
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+
   toggleModal (event) {
     this.setState({ show: !this.state.show})
   }
@@ -75,7 +87,6 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <h3 style={style.header}>{this.state.itemName}</h3>
         <div className="carousel" style={style.carousel}>
           <div className="carouselWrapper"
             style={{

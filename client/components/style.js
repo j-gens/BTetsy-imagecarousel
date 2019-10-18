@@ -1,4 +1,8 @@
 const exampleStyle = {
+  example: {
+    position: 'relative',
+    right: '-150%'
+  },
   header: {
     fontWeight: 400,
     fontSize: '20px',
@@ -72,6 +76,12 @@ const exampleStyle = {
     display: 'inline-flex',
     transition: 'transform ease-out 0.45s'
   },
+  container: {
+    display: 'block',
+    position: 'absolute',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
   displayNone: {
     display: 'none'
   },
@@ -81,12 +91,39 @@ const exampleStyle = {
     zIndex: '1',
     paddingTop: '100px',
     left: '0',
-    top: '0',
+    bottom: '0',
     width: '100%',
     height: '100%',
     overflow: 'auto',
     backgroundColor: 'rgb(0,0,0)',
     backgroundColor: 'rgba(0,0,0,0.4)'
+  },
+  modalContent: {
+    display: 'block',
+    width: '50%',
+    height: 'auto',
+    marginLeft: 'auto',
+    marginRight: 'auto'
+  },
+  button: {
+    display: 'inline-block',
+    position: 'absolute',
+    top: '2.5%',
+    left: '72.5%',
+    transform: 'translate(-50%, -50%)',
+    MsTransform: 'translate(-50%, -50%)',
+    backgroundColor: 'white',
+    color: 'black',
+    borderColor: 'rgba(0, 0, 0, 0.15)',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    fontSize: '16px',
+    padding: '12px 24px',
+    textAlign: 'center',
+    margin: '12px 12px 0px 0px',
+    padding: '12px 18px',
+    font: '400 11px system-ui'
   }
 };
 export default exampleStyle;
+
