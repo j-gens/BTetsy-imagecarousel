@@ -38,6 +38,7 @@ CREATE TABLE Wishlist (
 );
 
 
+
 INSERT INTO Products (productItem) Values ("Love Yourself Unisex Premium T-Shirt");
 INSERT INTO Product_Pictures (picture_url, productId) VALUES ("https://btetsy.s3.us-east-2.amazonaws.com/1_1.jpg", (select productId from Products where productItem = "Love Yourself Unisex Premium T-Shirt") );
 INSERT INTO Product_Pictures (picture_url, productId) VALUES ("https://btetsy.s3.us-east-2.amazonaws.com/1_2.jpg", (select productId from Products where productItem = "Love Yourself Unisex Premium T-Shirt") );

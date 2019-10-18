@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import axios from 'axios';
 import style from './style.js';
-import CarouselItem from './carousel.jsx';
+import CarouselPic from './carousel.jsx';
+import DisplayPic from './display.jsx';
 import LeftArrow from './leftArrow.jsx';
 import RightArrow from './rightArrow.jsx';
 
@@ -10,86 +11,98 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      itemName: 'BTS BT21 Official Pyjamas Set',
       images: [
         'https://btetsy.s3.us-east-2.amazonaws.com/2_1.jpg',
         'https://btetsy.s3.us-east-2.amazonaws.com/2_2.jpg',
         'https://btetsy.s3.us-east-2.amazonaws.com/2_3.jpg'
       ],
-      currentIndex: 0,
-      translateValue: 0
+      currIndex: 0,
+      translateVal: 0,
     };
     this.nextPicture = this.nextPicture.bind(this);
     this.prevPicture = this.prevPicture.bind(this);
+    this.selectedPicture = this.selectedPicture.bind(this);
   }
+
   carouselWidth () {
-    //todo: figure out how to get size
-    //if u change css size of width, change next line too
-    return 400;
+    var pic = document.getElementById('carouselPic');
+    return pic.clientWidth;
   }
 
-  //LEFT: go to the prev picture in carousel
   prevPicture() {
-    //if current index is 0
-    if (this.state.currentIndex === 0) {
+    const imagesLength = this.state.images.length - 1;
+    this.state.currIndex === 0 ?
       this.setState(state => ({
-        currentIndex: this.state.images.length - 1,
-        translateValue: -(this.state.images.length - 1) * (this.carouselWidth())
-      }));
-    } else {
+        currIndex: imagesLength,
+        translateVal: -(imagesLength) * (this.carouselWidth())
+      }))
+      :
       this.setState(state => ({
-        currentIndex: state.currentIndex - 1,
-        translateValue: state.translateValue + (this.carouselWidth())
+        currIndex: state.currIndex - 1,
+        translateVal: state.translateVal + (this.carouselWidth())
       }));
-    }
   }
 
-  //RIGHT: go to the next picture in carousel
   nextPicture() {
-    //if the current picture is the last one
-    if (this.state.currentIndex === this.state.images.length - 1) {
-      //return state to 0
-      return this.setState({
-        currentIndex: 0,
-        translateValue: 0
-      });
-    } else {
-    //else if not the current picture, keep going to the next one
+    const imagesLength = this.state.images.length - 1;
+    this.state.currIndex === imagesLength ?
+      this.setState({
+        currIndex: 0,
+        translateVal: 0
+      })
+      :
       this.setState(state => ({
-        currentIndex: state.currentIndex + 1,
-        translateValue: state.translateValue + -(this.carouselWidth())
+        currIndex: state.currIndex + 1,
+        translateVal: state.translateVal + -(this.carouselWidth())
       }));
-    }
+  }
+
+  selectedPicture(event) {
+    var selectedImg = Number(event.target.id);
+    this.setState(state => ({
+      currIndex: selectedImg,
+      translateVal: -(this.carouselWidth() * selectedImg)
+    }));
   }
 
   render () {
     return (
+      <div>
+        <h3 style={style.header}>{this.state.itemName}</h3>
+        <div className="carousel" style={style.carousel}>
+          <div className="carouselWrapper"
+            style={{
+              transform: `translateX(${this.state.translateVal}px)`,
+              ...style.carouselWrapper
+            }}>
+            {this.state.images.map((image, index) => (<CarouselPic key={index} image={image} />)
+            )}
+          </div>
 
-      <div className="carousel" style={style.carousel}>
-        <h1 style={style.header}>BTS</h1>
-        <div className="carouselWrapper"
-          style={{display: 'inline-flex',
-            //translateX moves pics horizontally
-            //translateY goes up and down when i click on left and right arrows
-            transform: `translateX(${this.state.translateValue}px)`,
-            transition: 'transform ease-out 0.45s'
-          }}>
-          {this.state.images.map((image, index) => (<CarouselItem key={index} image={image} />
-          ))}
+          <LeftArrow
+            prevPicture={this.prevPicture}
+          />
+
+          <RightArrow
+            nextPicture={this.nextPicture}
+          />
+
+          <div className="displayList">
+            <ul className="pictureList" style={{listStyleType: 'none'}}>
+              {this.state.images.map((image, index) =>
+                (<DisplayPic key={index} index={index} image={image} selectedPicture={this.selectedPicture}/>)
+              )}
+            </ul>
+          </div>
         </div>
 
-        <LeftArrow
-          prevPicture={this.prevPicture}
-        />
 
-        <RightArrow
-          nextPicture={this.nextPicture}
-        />
+
       </div>
     );
   }
 }
 
-ReactDom.render(<App/>,
-  document.getElementById('app')
-);
+
 export default App;

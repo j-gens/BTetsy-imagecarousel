@@ -1,25 +1,16 @@
 import React from 'react';
+import style from './style.js';
 
-const CarouselItem = (props) => {
-
+const CarouselPic = (props) => {
   return (
-
-    <div className="carouselItem" style={{
+    <div className="carouselPic" id="carouselPic" style={{
       backgroundImage: `url(${props.image})`,
-      backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: '50% 60%',
-      width: '400px',
-      height: '400px',
-      position: 'relative',
-      float: 'left'
+      ...style.carouselPic
     }}>
-
     </div>
-
   );
 };
 
 
 
-export default CarouselItem;
+export default CarouselPic;

@@ -24,4 +24,10 @@ let productSeed = () => {
   }
 };
 
+let wishlistSeed = () => {
+  var randomUsername = faker.internet.userName();
+  models.saveWishlist(['BTS BT21 Official Pyjamas Set', 'BTS - Bunny Hat Series Enamel Pin'], 'KIMTAEHYUNG');
+};
+
 productSeed();
+wishlistSeed();

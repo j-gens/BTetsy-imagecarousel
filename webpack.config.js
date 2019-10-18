@@ -1,6 +1,6 @@
-import css from 'file.css';
+
 module.exports = {
-  entry: './client/components/app.jsx',
+  entry: './client/components/index.jsx',
   module: {
     rules: [
       {
@@ -9,7 +9,10 @@ module.exports = {
           /node_modules/
         ],
         use: {
-          loader: ['babel-loader', 'css-loader']
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-react', '@babel/preset-env']
+          }
         }
       }
     ]
