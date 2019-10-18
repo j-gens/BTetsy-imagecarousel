@@ -71,6 +71,22 @@ const exampleStyle = {
   carouselWrapper: {
     display: 'inline-flex',
     transition: 'transform ease-out 0.45s'
+  },
+  displayNone: {
+    display: 'none'
+  },
+  modal: {
+    display: 'flex',
+    position: 'fixed',
+    zIndex: '1',
+    paddingTop: '100px',
+    left: '0',
+    top: '0',
+    width: '100%',
+    height: '100%',
+    overflow: 'auto',
+    backgroundColor: 'rgb(0,0,0)',
+    backgroundColor: 'rgba(0,0,0,0.4)'
   }
 };
 export default exampleStyle;

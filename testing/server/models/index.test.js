@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 var MyWishlistModel = productModel.MyWishlistModel;
 MyWishlistModel.find({username:/test_User/i}).remove().exec();
 
-describe('Product Model', () => {
+xdescribe('Product Model', () => {
 
   test('it should retrieve product data from the database', async () => {
     let result = await productModel.getProducts();
@@ -44,7 +44,7 @@ describe('Product Model', () => {
 });
 
 
-describe('API Routes', () => {
+xdescribe('API Routes', () => {
   test('A get request to /products/3 should return the requested product', (done) => {
     request.get('/products/3')
     .expect(200)
