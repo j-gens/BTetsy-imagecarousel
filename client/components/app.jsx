@@ -6,6 +6,7 @@ import CarouselPic from './carousel.jsx';
 import DisplayPic from './display.jsx';
 import LeftArrow from './leftArrow.jsx';
 import RightArrow from './rightArrow.jsx';
+import Modal from './modal.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -19,10 +20,15 @@ class App extends React.Component {
       ],
       currIndex: 0,
       translateVal: 0,
+      show: false
     };
     this.nextPicture = this.nextPicture.bind(this);
     this.prevPicture = this.prevPicture.bind(this);
-    this.selectedPicture = this.selectedPicture.bind(this);
+    this.selectedPic = this.selectedPic.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+  }
+  toggleModal (event) {
+    this.setState({ show: !this.state.show})
   }
 
   carouselWidth () {
@@ -58,7 +64,7 @@ class App extends React.Component {
       }));
   }
 
-  selectedPicture(event) {
+  selectedPic(event) {
     var selectedImg = Number(event.target.id);
     this.setState(state => ({
       currIndex: selectedImg,
@@ -76,7 +82,8 @@ class App extends React.Component {
               transform: `translateX(${this.state.translateVal}px)`,
               ...style.carouselWrapper
             }}>
-            {this.state.images.map((image, index) => (<CarouselPic key={index} image={image} />)
+            {this.state.images.map((image, index) =>
+            (<CarouselPic key={index} image={image} toggleModal={this.toggleModal} />)
             )}
           </div>
 
@@ -91,18 +98,15 @@ class App extends React.Component {
           <div className="displayList">
             <ul className="pictureList" style={{listStyleType: 'none'}}>
               {this.state.images.map((image, index) =>
-                (<DisplayPic key={index} index={index} image={image} selectedPicture={this.selectedPicture}/>)
+                (<DisplayPic key={index} index={index} image={image} selectedPic={this.selectedPic}/>)
               )}
             </ul>
           </div>
         </div>
-
-
-
+        <Modal toggle={this.toggleModal} show={this.state.show}
+        currIndex={this.state.currIndex} image={this.state.images}/>
       </div>
     );
   }
 }
-
-
 export default App;

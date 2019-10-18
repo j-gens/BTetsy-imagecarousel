@@ -3,7 +3,7 @@ import style from './style.js';
 
 const DisplayPic = (props) => {
   return (
-    <li onClick={props.selectedPicture} style={style.listPic}>
+    <li onClick={props.selectedPic} style={style.listPic}>
       <img src={props.image} style={style.eachPic} id={props.index}>
       </img>
     </li>

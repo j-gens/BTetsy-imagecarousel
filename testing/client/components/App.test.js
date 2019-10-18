@@ -19,11 +19,10 @@ describe('App', () => {
   });
 });
 
-describe('<CarouselPic />', () => {
+xdescribe('<CarouselPic />', () => {
   test('It renders a picture based on prop', () => {
 
     let wrapper = Enzyme.mount(<CarouselPic image={'https://btetsy.s3.us-east-2.amazonaws.com/2_1.jpg'} />);
-
     expect(wrapper.find('.carouselPic').get(0).props.style.backgroundImage).toBe('url(https://btetsy.s3.us-east-2.amazonaws.com/2_1.jpg)');
   });
 });
@@ -31,7 +30,7 @@ describe('<CarouselPic />', () => {
 describe('<LeftArrow/>', () => {
   test('It renders a left button in the navaigation bar', () => {
     let wrapper = Enzyme.mount(<LeftArrow/>);
-    // console.log('get the function, \n', wrapper.getElement('.leftArrow').type);
+    console.log('get the function, \n', wrapper.getElement('.leftArrow').type);
     expect(LeftArrow).toBeDefined();
     expect(wrapper).toMatchSnapshot();
     expect(typeof(wrapper.getElement('.leftArrow').type)).toBe('function');
@@ -39,7 +38,7 @@ describe('<LeftArrow/>', () => {
 
   test('It renders a left button that displays the previous picture in the item carousel', () => {
     let wrapper = Enzyme.mount(<App/>);
-    // console.log('whats the state of the picture?', wrapper.state('currIndex'));
+    console.log('whats the state of the picture?', wrapper.state('currIndex'));
     // console.log(wrapper.find('carousel'));
     expect(wrapper.state('currIndex')).toBe(0);
     wrapper.find('LeftArrow').simulate('click');
@@ -47,7 +46,7 @@ describe('<LeftArrow/>', () => {
   });
 });
 
-describe('<RightArrow/>', () => {
+xdescribe('<RightArrow/>', () => {
   test('It renders a right button in the navaigation bar', () => {
     let wrapper = Enzyme.mount(<RightArrow/>);
 
