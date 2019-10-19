@@ -13,15 +13,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      images: [
-        "https://btetsy.s3.us-east-2.amazonaws.com/3_1.jpg",
-        "https://btetsy.s3.us-east-2.amazonaws.com/3_2.jpg",
-        "https://btetsy.s3.us-east-2.amazonaws.com/3_3.jpg"
-    ],
+      images: [],
       currIndex: 0,
       translateVal: 0,
       show: false,
-      like: false
+      like: false,
+      productId: null
     };
     this.nextPicture = this.nextPicture.bind(this);
     this.prevPicture = this.prevPicture.bind(this);
@@ -39,7 +36,7 @@ class App extends React.Component {
   async toggleHeart (event) {
     await this.setState({ like: !this.state.like});
     axios.put('/products', {
-      productId: 1,
+      productId: this.state.productId,
       like: this.state.like
     })
       .then(response => {
@@ -51,7 +48,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/products/1')
+    var randomNum = (max) => {
+      return Math.floor(Math.random() * max) + 1;
+    };
+    var productId = randomNum(3);
+    this.setState({productId: productId});
+    axios.get(`/products/${productId}`)
     .then((results) => {
       this.setState({images: results.data[0].pictureUrl, like: results.data[0].like})
     })
