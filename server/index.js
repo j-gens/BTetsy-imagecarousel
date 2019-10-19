@@ -31,13 +31,11 @@ app.post('/wishlists', function (req, res) {
 //get individual product item
 app.get('/products/:productId', function (req, res) {
   res.send(models.getProductById(req.params.productId));
-  // models.getProductById(req.params.productId, (err, data) => {
-  //   if (err) {
-  //     throw err;
-  //   } else {
-  //     res.send(data);
-  //   }
-  // });
+});
+//get liked of product item
+app.get('/products/:like', function (req, res) {
+  res.send(models.getLike(req.params.like));
+
 });
 //getting individual wishlist
 app.get('/wishlists/:username', function (req, res) {

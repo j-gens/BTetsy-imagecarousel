@@ -6,6 +6,7 @@ import CarouselPic from './carousel.jsx';
 import DisplayPic from './display.jsx';
 import LeftArrow from './leftArrow.jsx';
 import RightArrow from './rightArrow.jsx';
+import HeartButton from './heartButton.jsx';
 import Modal from './modal.jsx';
 
 class App extends React.Component {
@@ -20,15 +21,23 @@ class App extends React.Component {
       ],
       currIndex: 0,
       translateVal: 0,
-      show: false
+      show: false,
+      like: false
     };
     this.nextPicture = this.nextPicture.bind(this);
     this.prevPicture = this.prevPicture.bind(this);
     this.selectedPic = this.selectedPic.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.toggleHeart = this.toggleHeart.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
-  }
 
+  }
+  toggleModal (event) {
+    this.setState({ show: !this.state.show})
+  }
+  toggleHeart (event) {
+    this.setState({ like: !this.state.like})
+  }
   componentDidMount() {
     axios.get('/products/2')
     .then((results) => {
@@ -37,10 +46,6 @@ class App extends React.Component {
     .catch((error) => {
       console.log(error);
     })
-  }
-
-  toggleModal (event) {
-    this.setState({ show: !this.state.show})
   }
 
   carouselWidth () {
@@ -97,6 +102,10 @@ class App extends React.Component {
             (<CarouselPic key={index} image={image} toggleModal={this.toggleModal} />)
             )}
           </div>
+
+          <HeartButton
+          toggleHeart={this.toggleHeart} like={this.state.like}
+          />
 
           <LeftArrow
             prevPicture={this.prevPicture}

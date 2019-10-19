@@ -36,6 +36,24 @@ const exampleStyle = {
     height: '30px',
     width: '30px'
   },
+  heartButton: {
+    height: '30px',
+    width: '30px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    background: 'white',
+    borderRadius: '50%',
+    cursor: 'pointer',
+    transition: 'transform ease-in .1s'
+  },
+  heart: {
+    position: 'absolute',
+    top: '1px',
+    right: '1px',
+    height: 'auto',
+    width: '30px'
+  },
   carousel: {
     position: 'relative',
     width: '500px',
@@ -123,7 +141,7 @@ const exampleStyle = {
     margin: '12px 12px 0px 0px',
     padding: '12px 18px',
     font: '400 11px system-ui'
-  }
+  },
 };
-export default exampleStyle;
 
+export default exampleStyle;

@@ -9,7 +9,8 @@ mongoose.connect('mongodb://localhost/BTetsy', {
 const Product = mongoose.Schema({
   productId: {type: Number, unique: true},
   productItem: String,
-  pictureUrl: Array
+  pictureUrl: Array,
+  like: Boolean
 });
 const Wishlist = mongoose.Schema({
   products: Array,
@@ -20,11 +21,12 @@ const MyProductsModel = mongoose.model('Product', Product);
 const MyWishlistModel = mongoose.model('Wishlist', Wishlist);
 
 //save 1 product
-let saveProduct = (productId, productItem, pictureUrl) => {
+let saveProduct = (productId, productItem, pictureUrl, like) => {
   const instance = new MyProductsModel({
     productId: productId,
     productItem: productItem,
-    pictureUrl: pictureUrl
+    pictureUrl: pictureUrl,
+    like: like
   });
   instance.save((err) => {
     if (!err) {
@@ -52,14 +54,20 @@ let getWishlists = async () => {
 let getProductById = async (productId) => {
   return await MyProductsModel.find({productId: productId});
 };
+//get like
+let getLiked= async (like) => {
+  return await MyProductsModel.find({like: like});
+};
 //get wishlist by username
 let getWishlistByUsername = async (username) => {
   return await MyWishlistModel.find({username: username});
 };
+
 module.exports.saveProduct = saveProduct;
 module.exports.saveWishlist = saveWishlist;
 module.exports.getProducts = getProducts;
 module.exports.getWishlists = getWishlists;
 module.exports.getProductById = getProductById;
+module.exports.getLiked = getLiked;
 module.exports.getWishlistByUsername = getWishlistByUsername;
 module.exports.MyWishlistModel = MyWishlistModel;
