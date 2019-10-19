@@ -17,12 +17,16 @@ app.get('/products', function (req, res) {
   });
 });
 
-//add product name, url, and username
+//add product name, url, username, like
 app.post('/products', function (req, res) {
-  models.saveProduct(req.body.productId, req.body.productItem, req.body.pictureUrl);
+  models.saveProduct(req.body.productId, req.body.productItem, req.body.pictureUrl, req.body.like);
   res.end('done');
 });
-
+//update like of productId
+app.put('/products', function (req, res) {
+  models.updateProduct(req.body.productId, req.body.like);
+  res.end('done');
+});
 //getting item and username from wishlist
 app.get('/wishlists', function (req, res) {
   models.getWishlists((err, data) => {

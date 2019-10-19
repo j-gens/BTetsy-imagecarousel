@@ -13,12 +13,11 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      itemName: 'BTS BT21 Official Pyjamas Set',
       images: [
-        'https://btetsy.s3.us-east-2.amazonaws.com/2_1.jpg',
-        'https://btetsy.s3.us-east-2.amazonaws.com/2_2.jpg',
-        'https://btetsy.s3.us-east-2.amazonaws.com/2_3.jpg'
-      ],
+        "https://btetsy.s3.us-east-2.amazonaws.com/3_1.jpg",
+        "https://btetsy.s3.us-east-2.amazonaws.com/3_2.jpg",
+        "https://btetsy.s3.us-east-2.amazonaws.com/3_3.jpg"
+    ],
       currIndex: 0,
       translateVal: 0,
       show: false,
@@ -32,16 +31,29 @@ class App extends React.Component {
     this.componentDidMount = this.componentDidMount.bind(this);
 
   }
+
   toggleModal (event) {
     this.setState({ show: !this.state.show})
   }
-  toggleHeart (event) {
-    this.setState({ like: !this.state.like})
+
+  async toggleHeart (event) {
+    await this.setState({ like: !this.state.like});
+    axios.put('/products', {
+      productId: 1,
+      like: this.state.like
+    })
+      .then(response => {
+        console.log(response, 'hello');
+      })
+      .catch(error => {
+        console.log(err);
+      });
   }
+
   componentDidMount() {
-    axios.get('/products/2')
+    axios.get('/products/1')
     .then((results) => {
-      this.setState({images: results.data[0].pictureUrl})
+      this.setState({images: results.data[0].pictureUrl, like: results.data[0].like})
     })
     .catch((error) => {
       console.log(error);

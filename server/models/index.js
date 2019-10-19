@@ -65,6 +65,19 @@ let getWishlistByUsername = (username, callback) => {
     callback(err, docs);
   });
 };
+//update product when liked
+let updateProduct = (productId, like, callback) => {
+
+  MyProductsModel.updateOne({productId: productId}, {like: like}, (err, docs) => {
+    try {
+      return docs;
+    }
+    catch(err){
+      console.error(err);
+    }
+  })
+};
+module.exports.updateProduct = updateProduct;
 module.exports.saveProduct = saveProduct;
 module.exports.saveWishlist = saveWishlist;
 module.exports.getProducts = getProducts;
