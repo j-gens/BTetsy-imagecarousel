@@ -43,31 +43,32 @@ let saveWishlist = async (products, username) => {
   return await instance.save();
 };
 
-let getProducts = async () => {
-  return await MyProductsModel.find({}).sort([['productId', 'ascending']]).exec();
+let getProducts = (callback) => {
+  MyProductsModel.find({}).sort([['productId', 'ascending']]).exec(function (err, docs) {
+    callback(err, docs);
+  });
 };
-
-let getWishlists = async () => {
-  return await MyWishlistModel.find({});
+let getWishlists = (callback) => {
+  MyWishlistModel.find({}, (err, docs) => {
+    callback(err, docs);
+  });
 };
 //get product by id
-let getProductById = async (productId) => {
-  return await MyProductsModel.find({productId: productId});
-};
-//get like
-let getLiked= async (like) => {
-  return await MyProductsModel.find({like: like});
+let getProductById = (productId, callback) => {
+  MyProductsModel.find({productId: productId}, (err, docs) => {
+    callback(err, docs);
+  });
 };
 //get wishlist by username
-let getWishlistByUsername = async (username) => {
-  return await MyWishlistModel.find({username: username});
+let getWishlistByUsername = (username, callback) => {
+  MyWishlistModel.find({username: username}, (err, docs) => {
+    callback(err, docs);
+  });
 };
-
 module.exports.saveProduct = saveProduct;
 module.exports.saveWishlist = saveWishlist;
 module.exports.getProducts = getProducts;
 module.exports.getWishlists = getWishlists;
 module.exports.getProductById = getProductById;
-module.exports.getLiked = getLiked;
 module.exports.getWishlistByUsername = getWishlistByUsername;
 module.exports.MyWishlistModel = MyWishlistModel;
