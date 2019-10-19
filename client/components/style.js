@@ -24,15 +24,15 @@ const exampleStyle = {
   },
   leftArrow: {
     position: 'absolute',
-    top: '40%',
-    left: '5%',
+    top: '35%',
+    left: '2%',
     height: '30px',
     width: '30px'
   },
   rightArrow: {
     position: 'absolute',
-    top: '40%',
-    right: '10%',
+    top: '35%',
+    right: '7%',
     height: '30px',
     width: '30px'
   },
@@ -49,8 +49,8 @@ const exampleStyle = {
   },
   heart: {
     position: 'absolute',
-    top: '1px',
-    right: '1px',
+    top: '4px',
+    right: '4px',
     height: 'auto',
     width: '30px'
   },

@@ -51,7 +51,7 @@ class App extends React.Component {
     var randomNum = (max) => {
       return Math.floor(Math.random() * max) + 1;
     };
-    var productId = randomNum(3);
+    var productId = randomNum(5);
     this.setState({productId: productId});
     axios.get(`/products/${productId}`)
     .then((results) => {
