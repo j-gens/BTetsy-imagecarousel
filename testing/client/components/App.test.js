@@ -38,7 +38,7 @@ describe('<LeftArrow/>', () => {
 
   test('It renders a left button that displays the previous picture in the item carousel', () => {
     let wrapper = Enzyme.mount(<App/>);
-    console.log('whats the state of the picture?', wrapper.state('currIndex'));
+    // console.log('whats the state of the picture?', wrapper.state('currIndex'));
     // console.log(wrapper.find('carousel'));
     expect(wrapper.state('currIndex')).toBe(0);
     wrapper.find('LeftArrow').simulate('click');

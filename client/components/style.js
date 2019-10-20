@@ -1,4 +1,8 @@
 const exampleStyle = {
+  example: {
+    position: 'relative',
+    right: '-150%'
+  },
   header: {
     fontWeight: 400,
     fontSize: '20px',
@@ -20,16 +24,34 @@ const exampleStyle = {
   },
   leftArrow: {
     position: 'absolute',
-    top: '40%',
-    left: '5%',
+    top: '35%',
+    left: '2%',
     height: '30px',
     width: '30px'
   },
   rightArrow: {
     position: 'absolute',
-    top: '40%',
-    right: '10%',
+    top: '35%',
+    right: '7%',
     height: '30px',
+    width: '30px'
+  },
+  heartButton: {
+    height: '30px',
+    width: '30px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    background: 'white',
+    borderRadius: '50%',
+    cursor: 'pointer',
+    transition: 'transform ease-in .1s'
+  },
+  heart: {
+    position: 'absolute',
+    top: '4px',
+    right: '4px',
+    height: 'auto',
     width: '30px'
   },
   carousel: {
@@ -72,6 +94,12 @@ const exampleStyle = {
     display: 'inline-flex',
     transition: 'transform ease-out 0.45s'
   },
+  container: {
+    display: 'block',
+    position: 'absolute',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
   displayNone: {
     display: 'none'
   },
@@ -79,14 +107,43 @@ const exampleStyle = {
     display: 'flex',
     position: 'fixed',
     zIndex: '1',
-    paddingTop: '100px',
+    paddingTop: '30px',
     left: '0',
-    top: '0',
+    bottom: '0',
+    top: '0px',
     width: '100%',
     height: '100%',
     overflow: 'auto',
+    overflowY: 'hidden',
     backgroundColor: 'rgb(0,0,0)',
     backgroundColor: 'rgba(0,0,0,0.4)'
-  }
+  },
+  modalContent: {
+    display: 'block',
+    width: '600px',
+    height: 'auto',
+    marginLeft: '450px',
+    marginRight: 'auto'
+  },
+  button: {
+    display: 'inline-block',
+    position: 'absolute',
+    top: '2.5%',
+    left: '97%',
+    transform: 'translate(-50%, -50%)',
+    MsTransform: 'translate(-50%, -50%)',
+    backgroundColor: 'white',
+    color: 'black',
+    borderColor: 'rgba(0, 0, 0, 0.15)',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    fontSize: '16px',
+    padding: '12px 24px',
+    textAlign: 'center',
+    margin: '12px 12px 0px 0px',
+    padding: '12px 18px',
+    font: '400 11px system-ui'
+  },
 };
+
 export default exampleStyle;

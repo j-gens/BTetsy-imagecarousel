@@ -9,7 +9,8 @@ mongoose.connect('mongodb://localhost/BTetsy', {
 const Product = mongoose.Schema({
   productId: {type: Number, unique: true},
   productItem: String,
-  pictureUrl: Array
+  pictureUrl: Array,
+  like: Boolean
 });
 const Wishlist = mongoose.Schema({
   products: Array,
@@ -20,11 +21,12 @@ const MyProductsModel = mongoose.model('Product', Product);
 const MyWishlistModel = mongoose.model('Wishlist', Wishlist);
 
 //save 1 product
-let saveProduct = (productId, productItem, pictureUrl) => {
+let saveProduct = (productId, productItem, pictureUrl, like) => {
   const instance = new MyProductsModel({
     productId: productId,
     productItem: productItem,
-    pictureUrl: pictureUrl
+    pictureUrl: pictureUrl,
+    like: like
   });
   instance.save((err) => {
     if (!err) {
@@ -41,21 +43,41 @@ let saveWishlist = async (products, username) => {
   return await instance.save();
 };
 
-let getProducts = async () => {
-  return await MyProductsModel.find({}).sort([['productId', 'ascending']]).exec();
+let getProducts = (callback) => {
+  MyProductsModel.find({}).sort([['productId', 'ascending']]).exec(function (err, docs) {
+    callback(err, docs);
+  });
 };
-
-let getWishlists = async () => {
-  return await MyWishlistModel.find({});
+let getWishlists = (callback) => {
+  MyWishlistModel.find({}, (err, docs) => {
+    callback(err, docs);
+  });
 };
 //get product by id
-let getProductById = async (productId) => {
-  return await MyProductsModel.find({productId: productId});
+let getProductById = (productId, callback) => {
+  MyProductsModel.find({productId: productId}, (err, docs) => {
+    callback(err, docs);
+  });
 };
 //get wishlist by username
-let getWishlistByUsername = async (username) => {
-  return await MyWishlistModel.find({username: username});
+let getWishlistByUsername = (username, callback) => {
+  MyWishlistModel.find({username: username}, (err, docs) => {
+    callback(err, docs);
+  });
 };
+//update product when liked
+let updateProduct = (productId, like, callback) => {
+
+  MyProductsModel.updateOne({productId: productId}, {like: like}, (err, docs) => {
+    try {
+      return docs;
+    }
+    catch(err){
+      console.error(err);
+    }
+  })
+};
+module.exports.updateProduct = updateProduct;
 module.exports.saveProduct = saveProduct;
 module.exports.saveWishlist = saveWishlist;
 module.exports.getProducts = getProducts;
