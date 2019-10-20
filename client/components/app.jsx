@@ -25,8 +25,6 @@ class App extends React.Component {
     this.selectedPic = this.selectedPic.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.toggleHeart = this.toggleHeart.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this);
-
   }
 
   toggleModal (event) {
@@ -129,7 +127,7 @@ class App extends React.Component {
             nextPicture={this.nextPicture}
           />
 
-          <div className="displayList">
+          <div className="displayList" style={style.displayContainer}>
             <ul className="pictureList" style={{listStyleType: 'none'}}>
               {this.state.images.map((image, index) =>
                 (<DisplayPic key={index} index={index} image={image} selectedPic={this.selectedPic}/>)

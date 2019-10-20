@@ -25,7 +25,7 @@ const exampleStyle = {
   leftArrow: {
     position: 'absolute',
     top: '35%',
-    left: '2%',
+    left: '3%',
     height: '30px',
     width: '30px'
   },
@@ -73,13 +73,18 @@ const exampleStyle = {
     height: '100%',
     width: '100%'
   },
+  displayContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginLeft: '-8%'
+  },
   listPic: {
     position: 'relative',
-    float: 'left'
+    float: 'left',
   },
   eachPic: {
-    width: '70px',
-    height: '70px'
+    width: '60px',
+    height: '60px'
   },
   carouselPic: {
     backgroundSize: 'cover',
@@ -113,8 +118,9 @@ const exampleStyle = {
     top: '0px',
     width: '100%',
     height: '100%',
-    overflow: 'auto',
+    overflow: 'hidden',
     overflowY: 'hidden',
+    overflowX: 'hidden',
     backgroundColor: 'rgb(0,0,0)',
     backgroundColor: 'rgba(0,0,0,0.4)'
   },
