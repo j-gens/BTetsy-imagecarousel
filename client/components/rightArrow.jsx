@@ -1,9 +1,8 @@
 import React from 'react';
-import style from './style.js';
-
+import './styles.css';
 const RightArrow = (props) => (
-  <div className="rightArrow arrow" onClick={props.nextPicture} style={style.rightArrow}>
-    <i className="fa fa-angle-right fa-3x" aria-hidden="true" style={style.arrow}></i>
+  <div className="rightArrow arrow" onClick={props.nextPicture}>
+    <i className="fa fa-angle-right fa-3x" aria-hidden="true"></i>
   </div>
 );
 
