@@ -1,16 +1,16 @@
 const exampleStyle = {
-  example: {
-    position: 'relative',
-    right: '-150%'
-  },
-  header: {
-    fontWeight: 400,
-    fontSize: '20px',
-    lineHeight: '26px',
-    position: 'relative',
-    right: '-70%',
-    top: '50px'
-  },
+  // example: {
+  //   position: 'relative',
+  //   right: '-150%'
+  // },
+  // header: {
+  //   fontWeight: 400,
+  //   fontSize: '20px',
+  //   lineHeight: '26px',
+  //   position: 'relative',
+  //   right: '-70%',
+  //   top: '50px'
+  // },
   // carousel: {
   //   position: 'relative',
   //   width: '500px',
