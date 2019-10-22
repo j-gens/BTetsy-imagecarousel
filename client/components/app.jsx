@@ -8,6 +8,7 @@ import LeftArrow from './leftArrow.jsx';
 import RightArrow from './rightArrow.jsx';
 import HeartButton from './heartButton.jsx';
 import Modal from './modal.jsx';
+import './styles.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -104,11 +105,10 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <div className="carousel" style={style.carousel}>
+        <div className="carousel" >
           <div className="carouselWrapper"
             style={{
-              transform: `translateX(${this.state.translateVal}px)`,
-              ...style.carouselWrapper
+              transform: `translateX(${this.state.translateVal}px)`
             }}>
             {this.state.images.map((image, index) =>
             (<CarouselPic key={index} image={image} toggleModal={this.toggleModal} />)
@@ -127,7 +127,7 @@ class App extends React.Component {
             nextPicture={this.nextPicture}
           />
 
-          <div className="displayList" style={style.displayContainer}>
+          <div className="displayContainer" >
             <ul className="pictureList" style={{listStyleType: 'none'}}>
               {this.state.images.map((image, index) =>
                 (<DisplayPic key={index} index={index} image={image} selectedPic={this.selectedPic}/>)

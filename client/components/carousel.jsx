@@ -1,11 +1,10 @@
 import React from 'react';
-import style from './style.js';
+import styles from './styles.css';
 
 const CarouselPic = (props) => {
   return (
     <div className="carouselPic" id="carouselPic" onClick={props.toggleModal} style={{
-      backgroundImage: `url(${props.image})`,
-      ...style.carouselPic
+      backgroundImage: `url(${props.image})`
     }}>
     </div>
   );
