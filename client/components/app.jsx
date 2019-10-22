@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import axios from 'axios';
-import style from './style.js';
 import CarouselPic from './carousel.jsx';
 import DisplayPic from './display.jsx';
 import LeftArrow from './leftArrow.jsx';
 import RightArrow from './rightArrow.jsx';
 import HeartButton from './heartButton.jsx';
 import Modal from './modal.jsx';
+import './styles.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -25,8 +25,6 @@ class App extends React.Component {
     this.selectedPic = this.selectedPic.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.toggleHeart = this.toggleHeart.bind(this);
-    this.componentDidMount = this.componentDidMount.bind(this);
-
   }
 
   toggleModal (event) {
@@ -51,7 +49,7 @@ class App extends React.Component {
     var randomNum = (max) => {
       return Math.floor(Math.random() * max) + 1;
     };
-    var productId = randomNum(5);
+    var productId = randomNum(4);
     this.setState({productId: productId});
     axios.get(`/products/${productId}`)
     .then((results) => {
@@ -106,11 +104,10 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <div className="carousel" style={style.carousel}>
+        <div className="carousel" >
           <div className="carouselWrapper"
             style={{
-              transform: `translateX(${this.state.translateVal}px)`,
-              ...style.carouselWrapper
+              transform: `translateX(${this.state.translateVal}px)`
             }}>
             {this.state.images.map((image, index) =>
             (<CarouselPic key={index} image={image} toggleModal={this.toggleModal} />)
@@ -129,7 +126,7 @@ class App extends React.Component {
             nextPicture={this.nextPicture}
           />
 
-          <div className="displayList">
+          <div className="displayContainer" >
             <ul className="pictureList" style={{listStyleType: 'none'}}>
               {this.state.images.map((image, index) =>
                 (<DisplayPic key={index} index={index} image={image} selectedPic={this.selectedPic}/>)
