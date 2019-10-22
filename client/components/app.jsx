@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import axios from 'axios';
-import style from './style.js';
 import CarouselPic from './carousel.jsx';
 import DisplayPic from './display.jsx';
 import LeftArrow from './leftArrow.jsx';
@@ -50,7 +49,7 @@ class App extends React.Component {
     var randomNum = (max) => {
       return Math.floor(Math.random() * max) + 1;
     };
-    var productId = randomNum(5);
+    var productId = randomNum(4);
     this.setState({productId: productId});
     axios.get(`/products/${productId}`)
     .then((results) => {
