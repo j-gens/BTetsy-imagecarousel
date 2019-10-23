@@ -1,12 +1,12 @@
 import React from 'react';
-import './styles.css';
+import styles from './styles.css';
 
 const CarouselPic = ({ toggleModal, image }) => (
   <div
     role="button"
     aria-label="model open"
     tabIndex="0"
-    className="carouselPic"
+    className={styles.carouselPic}
     id="carouselPic"
     onClick={toggleModal}
     style={{

@@ -1,8 +1,8 @@
 import React from 'react';
-import './styles.css';
+import styles from './styles.css';
 
 const DisplayPic = ({ image, index, selectedPic }) => (
-  <li className="thumbnails">
+  <li className={styles.thumbnails}>
     <div
       role="button"
       tabIndex="0"
@@ -12,7 +12,7 @@ const DisplayPic = ({ image, index, selectedPic }) => (
       <img
         alt="item"
         src={image}
-        className="thumbnail"
+        className={styles.thumbnail}
         id={index}
       />
     </div>

@@ -1,14 +1,15 @@
 import React from 'react';
 import axios from 'axios';
-import CarouselPic from './Carousel.jsx';
+import CarouselPic from './CarouselPic.jsx';
 import DisplayPic from './Display.jsx';
 import LeftArrow from './LeftArrow.jsx';
 import RightArrow from './RightArrow.jsx';
 import HeartButton from './HeartButton.jsx';
-import Modal from './Modal.jsx';
-import './styles.css';
+import ModalBox from './ModalBox.jsx';
+import styles from './styles.css';
 
 class App extends React.Component {
+  // static functions refer to App
   static carouselWidth() {
     const pic = document.getElementById('carouselPic');
     return pic.clientWidth;
@@ -116,10 +117,11 @@ class App extends React.Component {
       translateVal, images, like, show, currIndex,
     } = this.state;
     return (
+
       <div>
-        <div className="carousel">
+        <div className={styles.carousel}>
           <div
-            className="carouselWrapper"
+            className={styles.carouselWrapper}
             style={{
               transform: `translateX(${translateVal}px)`,
             }}
@@ -140,13 +142,13 @@ class App extends React.Component {
             nextPicture={this.nextPicture}
           />
 
-          <div className="displayContainer">
-            <ul className="pictureList" style={{ listStyleType: 'none' }}>
+          <div className={styles.displayContainer}>
+            <ul className={styles.pictureList} style={{ listStyleType: 'none' }}>
               {images.map((image, index) => (<DisplayPic key={image} index={index} image={image} selectedPic={this.selectedPic} />))}
             </ul>
           </div>
         </div>
-        <Modal
+        <ModalBox
           toggle={this.toggleModal}
           show={show}
           currIndex={currIndex}

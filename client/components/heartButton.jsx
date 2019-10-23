@@ -1,8 +1,8 @@
 import React from 'react';
-import './styles.css';
+import styles from './styles.css';
 
 const HeartButton = ({ toggleHeart, like }) => (
-  <div role="button" tabIndex="0" aria-label="wishlist button" className="heartShapeButton" onClick={toggleHeart}>
+  <div role="button" tabIndex="0" aria-label="wishlist button" className={styles.heartShapeButton} onClick={toggleHeart}>
     {like
       ? (
         <i
