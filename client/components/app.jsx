@@ -98,7 +98,7 @@ class App extends React.Component {
     } else {
       this.setState(() => ({
         currIndex: currIndex + 1,
-        translateVal: translateVal + -(this.carouselWidth()),
+        translateVal: translateVal + -(App.carouselWidth()),
       }));
     }
   }
@@ -107,7 +107,7 @@ class App extends React.Component {
     const selectedImg = Number(event.target.id);
     this.setState(() => ({
       currIndex: selectedImg,
-      translateVal: -(this.carouselWidth() * selectedImg),
+      translateVal: -(App.carouselWidth() * selectedImg),
     }));
   }
 
