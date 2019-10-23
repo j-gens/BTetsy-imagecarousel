@@ -48,17 +48,21 @@
   position: relative;
   float: left;
 }
-.thumbnail {
+.thumbnailAfter {
   width: 60px;
   height: 60px;
+  opacity: 1;
 }
-ul li:hover {
+.thumbnailBefore {
+  width: 60px;
+  height: 60px;
+  opacity: .5;
+}
+img.thumbnailBefore:hover {
   opacity: 1;
   -webkit-animation: fadein .5s;
 }
-ul li {
-  opacity: .5;
-}
+
 @-webkit-keyframes fadein {
   from { opacity: .5; }
   to   { opacity: 1; }

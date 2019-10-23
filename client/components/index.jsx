@@ -5,5 +5,5 @@ import App from './app.jsx';
 
 ReactDom.render(
   <App />,
-  document.getElementById('app'),
+  document.getElementById('carousel'),
 );

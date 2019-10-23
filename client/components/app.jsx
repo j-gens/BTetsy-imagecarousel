@@ -24,10 +24,12 @@ class App extends React.Component {
       show: false,
       like: false,
       productId: null,
+      currTN: null,
     };
     this.nextPicture = this.nextPicture.bind(this);
     this.prevPicture = this.prevPicture.bind(this);
     this.selectedPic = this.selectedPic.bind(this);
+    this.currThumbnail = this.currThumbnail.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.toggleHeart = this.toggleHeart.bind(this);
   }
@@ -54,13 +56,11 @@ class App extends React.Component {
 
   // eslint-disable-next-line
   async toggleHeart () {
-
+    const { productId } = this.state;
     await this.setState((state) => ({ like: !state.like }));
-    axios.put('/products', {
+    axios.put(`/products/${productId}`, {
       // eslint-disable-next-line
-      productId: this.state.productId,
-      // eslint-disable-next-line
-      like: this.state.like
+      like: this.state.like,
     })
       .then((response) => {
         // eslint-disable-next-line
@@ -112,9 +112,16 @@ class App extends React.Component {
     }));
   }
 
+  currThumbnail(event) {
+    const currTNail = Number(event.target.id);
+    this.setState(() => ({
+      currTN: currTNail,
+    }), () => { console.log('current thumbnail', this.state.currTN); });
+  }
+
   render() {
     const {
-      translateVal, images, like, show, currIndex,
+      translateVal, images, like, show, currIndex, currTN,
     } = this.state;
     return (
 
@@ -144,7 +151,7 @@ class App extends React.Component {
 
           <div className={styles.displayContainer}>
             <ul className={styles.pictureList} style={{ listStyleType: 'none' }}>
-              {images.map((image, index) => (<DisplayPic key={image} index={index} image={image} selectedPic={this.selectedPic} />))}
+              {images.map((image, index) => (<DisplayPic key={image} index={index} image={image} selectedPic={this.selectedPic} currThumbnail={this.currThumbnail} currTN={currTN} />))}
             </ul>
           </div>
         </div>

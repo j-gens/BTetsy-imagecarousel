@@ -24,8 +24,9 @@ app.post('/products', (req, res) => {
   res.end('done');
 });
 // update like of productId
-app.put('/products', (req, res) => {
-  models.updateProduct(req.body.productId, req.body.like, (err, results) => {
+app.put('/products/:productId', (req, res) => {
+  console.log('congratulations', req.params.productId);
+  models.updateProduct(req.params.productId, req.body.like, (err, results) => {
     if (err) {
       res.status(404).send('Error occured updating product info');
     }
