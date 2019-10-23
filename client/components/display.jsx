@@ -1,14 +1,22 @@
 import React from 'react';
-import styles from './styles.css';
+import './styles.css';
 
-const DisplayPic = (props) => {
-  return (
-    <li onClick={props.selectedPic} className="thumbnails">
-      <img src={props.image} className="thumbnail" id={props.index}>
-      </img>
-    </li>
-  );
-};
-
+const DisplayPic = ({ image, index, selectedPic }) => (
+  <li className="thumbnails">
+    <div
+      role="button"
+      tabIndex="0"
+      aria-label="thumbnail image button"
+      onClick={selectedPic}
+    >
+      <img
+        alt="item"
+        src={image}
+        className="thumbnail"
+        id={index}
+      />
+    </div>
+  </li>
+);
 
 export default DisplayPic;

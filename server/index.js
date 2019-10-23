@@ -6,7 +6,7 @@ const app = express();
 app.use(parser.json());
 
 app.use(express.static(__dirname + '/../dist'));
-//get the names and pics of the products
+// get the names and pics of the products
 app.get('/products', function (req, res) {
   models.getProducts((err, data) => {
     if (err) {
@@ -17,17 +17,22 @@ app.get('/products', function (req, res) {
   });
 });
 
-//add product name, url, username, like
+// add product name, url, username, like
 app.post('/products', function (req, res) {
   models.saveProduct(req.body.productId, req.body.productItem, req.body.pictureUrl, req.body.like);
   res.end('done');
 });
-//update like of productId
+// update like of productId
 app.put('/products', function (req, res) {
-  models.updateProduct(req.body.productId, req.body.like);
-  res.end('done');
+
+  models.updateProduct(req.body.productId, req.body.like, (err, results) => {
+    if (err) {
+      res.status(404).send('Error occured updating product info');
+    }
+    res.status(200).send(results);
+  });
 });
-//getting item and username from wishlist
+// getting item and username from wishlist
 app.get('/wishlists', function (req, res) {
   models.getWishlists((err, data) => {
     if (err) {
@@ -38,13 +43,13 @@ app.get('/wishlists', function (req, res) {
   });
 });
 
-//adding product name and username to wishlist
+// adding product name and username to wishlist
 app.post('/wishlists', function (req, res) {
   models.saveWishlist(req.body.products, req.body.username);
   res.end('finished');
 });
 
-//get individual product item
+// get individual product item
 app.get('/products/:productId', function (req, res) {
   models.getProductById(req.params.productId, (err, data) => {
     if (err) {
@@ -54,7 +59,7 @@ app.get('/products/:productId', function (req, res) {
     }
   });
 });
-//getting individual wishlist
+// getting individual wishlist
 app.get('/wishlists/:username', function (req, res) {
   models.getWishlistByUsername(req.params.username, (err, data) => {
     if (err) {

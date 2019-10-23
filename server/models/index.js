@@ -61,20 +61,12 @@ let getProductById = (productId, callback) => {
 };
 //get wishlist by username
 let getWishlistByUsername = (username, callback) => {
-  MyWishlistModel.find({username: username}, (err, docs) => {
-    callback(err, docs);
-  });
+  MyWishlistModel.find({username}, callback);
 };
 //update product when liked
 let updateProduct = (productId, like, callback) => {
-
   MyProductsModel.updateOne({productId: productId}, {like: like}, (err, docs) => {
-    try {
-      return docs;
-    }
-    catch(err){
-      console.error(err);
-    }
+    callback(err, docs);
   })
 };
 module.exports.updateProduct = updateProduct;

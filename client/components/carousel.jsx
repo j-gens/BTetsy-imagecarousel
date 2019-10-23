@@ -1,13 +1,18 @@
 import React from 'react';
-import styles from './styles.css';
+import './styles.css';
 
-const CarouselPic = (props) => {
-  return (
-    <div className="carouselPic" id="carouselPic" onClick={props.toggleModal} style={{
-      backgroundImage: `url(${props.image})`
-    }}>
-    </div>
-  );
-};
+const CarouselPic = ({ toggleModal, image }) => (
+  <div
+    role="button"
+    aria-label="model open"
+    tabIndex="0"
+    className="carouselPic"
+    id="carouselPic"
+    onClick={toggleModal}
+    style={{
+      backgroundImage: `url(${image})`,
+    }}
+  />
+);
 
 export default CarouselPic;

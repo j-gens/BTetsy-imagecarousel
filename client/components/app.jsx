@@ -1,15 +1,19 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 import axios from 'axios';
-import CarouselPic from './carousel.jsx';
-import DisplayPic from './display.jsx';
-import LeftArrow from './leftArrow.jsx';
-import RightArrow from './rightArrow.jsx';
-import HeartButton from './heartButton.jsx';
-import Modal from './modal.jsx';
+import CarouselPic from './Carousel.jsx';
+import DisplayPic from './Display.jsx';
+import LeftArrow from './LeftArrow.jsx';
+import RightArrow from './RightArrow.jsx';
+import HeartButton from './HeartButton.jsx';
+import Modal from './Modal.jsx';
 import './styles.css';
 
 class App extends React.Component {
+  static carouselWidth() {
+    const pic = document.getElementById('carouselPic');
+    return pic.clientWidth;
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -18,7 +22,7 @@ class App extends React.Component {
       translateVal: 0,
       show: false,
       like: false,
-      productId: null
+      productId: null,
     };
     this.nextPicture = this.nextPicture.bind(this);
     this.prevPicture = this.prevPicture.bind(this);
@@ -27,95 +31,105 @@ class App extends React.Component {
     this.toggleHeart = this.toggleHeart.bind(this);
   }
 
-  toggleModal (event) {
-    this.setState({ show: !this.state.show})
-  }
 
-  async toggleHeart (event) {
-    await this.setState({ like: !this.state.like});
-    axios.put('/products', {
-      productId: this.state.productId,
-      like: this.state.like
-    })
-      .then(response => {
-        console.log(response, 'hello');
+  componentDidMount() {
+    const randomNum = (max) => (Math.floor(Math.random() * max) + 1
+    );
+    const productId = randomNum(4);
+    this.setState({ productId });
+    axios.get(`/products/${productId}`)
+      .then((results) => {
+        this.setState({ images: results.data[0].pictureUrl, like: results.data[0].like });
       })
-      .catch(error => {
-        console.log(err);
+      .catch((error) => {
+        // eslint-disable-next-line
+        console.error(error);
       });
   }
 
-  componentDidMount() {
-    var randomNum = (max) => {
-      return Math.floor(Math.random() * max) + 1;
-    };
-    var productId = randomNum(4);
-    this.setState({productId: productId});
-    axios.get(`/products/${productId}`)
-    .then((results) => {
-      this.setState({images: results.data[0].pictureUrl, like: results.data[0].like})
-    })
-    .catch((error) => {
-      console.log(error);
-    })
+  toggleModal() {
+    this.setState((state) => ({ show: !state.show }));
   }
 
-  carouselWidth () {
-    var pic = document.getElementById('carouselPic');
-    return pic.clientWidth;
+  // eslint-disable-next-line
+  async toggleHeart () {
+
+    await this.setState((state) => ({ like: !state.like }));
+    axios.put('/products', {
+      // eslint-disable-next-line
+      productId: this.state.productId,
+      // eslint-disable-next-line
+      like: this.state.like
+    })
+      .then((response) => {
+        // eslint-disable-next-line
+        console.log(response);
+      })
+      .catch((error) => {
+        // eslint-disable-next-line
+        console.error(error);
+      });
   }
 
   prevPicture() {
-    const imagesLength = this.state.images.length - 1;
-    this.state.currIndex === 0 ?
-      this.setState(state => ({
+    const { images, currIndex, translateVal } = this.state;
+    const imagesLength = images.length - 1;
+    if (currIndex === 0) {
+      this.setState(() => ({
         currIndex: imagesLength,
-        translateVal: -(imagesLength) * (this.carouselWidth())
-      }))
-      :
-      this.setState(state => ({
-        currIndex: state.currIndex - 1,
-        translateVal: state.translateVal + (this.carouselWidth())
+        translateVal: -(imagesLength) * (App.carouselWidth()),
       }));
+    } else {
+      this.setState(() => ({
+        currIndex: currIndex - 1,
+        translateVal: translateVal + (App.carouselWidth()),
+      }));
+    }
   }
 
   nextPicture() {
-    const imagesLength = this.state.images.length - 1;
-    this.state.currIndex === imagesLength ?
+    const { images, currIndex, translateVal } = this.state;
+    const imagesLength = images.length - 1;
+    if (currIndex === imagesLength) {
       this.setState({
         currIndex: 0,
-        translateVal: 0
-      })
-      :
-      this.setState(state => ({
-        currIndex: state.currIndex + 1,
-        translateVal: state.translateVal + -(this.carouselWidth())
+        translateVal: 0,
+      });
+    } else {
+      this.setState(() => ({
+        currIndex: currIndex + 1,
+        translateVal: translateVal + -(this.carouselWidth()),
       }));
+    }
   }
 
   selectedPic(event) {
-    var selectedImg = Number(event.target.id);
-    this.setState(state => ({
+    const selectedImg = Number(event.target.id);
+    this.setState(() => ({
       currIndex: selectedImg,
-      translateVal: -(this.carouselWidth() * selectedImg)
+      translateVal: -(this.carouselWidth() * selectedImg),
     }));
   }
 
-  render () {
+  render() {
+    const {
+      translateVal, images, like, show, currIndex,
+    } = this.state;
     return (
       <div>
-        <div className="carousel" >
-          <div className="carouselWrapper"
+        <div className="carousel">
+          <div
+            className="carouselWrapper"
             style={{
-              transform: `translateX(${this.state.translateVal}px)`
-            }}>
-            {this.state.images.map((image, index) =>
-            (<CarouselPic key={index} image={image} toggleModal={this.toggleModal} />)
-            )}
+              transform: `translateX(${translateVal}px)`,
+            }}
+          >
+            {images.map((image) => (<CarouselPic key={image} image={image} toggleModal={this.toggleModal} />))}
           </div>
 
           <HeartButton
-          toggleHeart={this.toggleHeart} like={this.state.like}
+            toggleHeart={this.toggleHeart}
+            like={like}
           />
 
           <LeftArrow
@@ -126,16 +140,18 @@ class App extends React.Component {
             nextPicture={this.nextPicture}
           />
 
-          <div className="displayContainer" >
-            <ul className="pictureList" style={{listStyleType: 'none'}}>
-              {this.state.images.map((image, index) =>
-                (<DisplayPic key={index} index={index} image={image} selectedPic={this.selectedPic}/>)
-              )}
+          <div className="displayContainer">
+            <ul className="pictureList" style={{ listStyleType: 'none' }}>
+              {images.map((image, index) => (<DisplayPic key={image} index={index} image={image} selectedPic={this.selectedPic} />))}
             </ul>
           </div>
         </div>
-        <Modal toggle={this.toggleModal} show={this.state.show}
-        currIndex={this.state.currIndex} image={this.state.images}/>
+        <Modal
+          toggle={this.toggleModal}
+          show={show}
+          currIndex={currIndex}
+          image={images}
+        />
       </div>
     );
   }

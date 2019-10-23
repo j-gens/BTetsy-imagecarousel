@@ -1,9 +1,9 @@
 import React from 'react';
 import './styles.css';
 
-const LeftArrow = (props) => (
-  <div className="leftArrow arrow" onClick={props.prevPicture}>
-    <i className="fa fa-angle-left fa-3x" aria-hidden="true"></i>
+const LeftArrow = ({ prevPicture }) => (
+  <div role="button" tabIndex="0" aria-label="left arrow" className="leftArrow arrow" onClick={prevPicture}>
+    <i className="fa fa-angle-left fa-3x" aria-hidden="true" />
   </div>
 );
 
