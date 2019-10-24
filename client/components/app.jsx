@@ -36,9 +36,6 @@ class App extends React.Component {
 
 
   componentDidMount() {
-    // const randomNum = (max) => (Math.floor(Math.random() * max) + 1
-    // );
-    // const productId = randomNum(4);
     const searchParams = new URLSearchParams(window.location.search);
     const productId = Number(searchParams.get('productId'));
     this.setState({ productId });
@@ -56,8 +53,8 @@ class App extends React.Component {
     this.setState((state) => ({ show: !state.show }));
   }
 
-  // eslint-disable-next-line
-  async toggleHeart () {
+
+  async toggleHeart() {
     const { productId } = this.state;
     await this.setState((state) => ({ like: !state.like }));
     axios.put(`/products/${productId}`, {

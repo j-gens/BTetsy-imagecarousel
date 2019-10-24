@@ -7,7 +7,7 @@ const ModalBox = ({
   show,
   image,
 }) => (
-  <div role="button" aria-label="show modal" tabIndex="0" onClick={toggle} className={show ? styles.modal : styles.displayNone}>
+  <div role="button" aria-label="show modal" tabIndex="0" onClick={toggle} className={show ? styles.modalBox : styles.displayNone}>
     <div className={styles.modalContainer}>
       <img alt="modal content" src={image[currIndex]} className={styles.modalContent} />
       <span className={styles.button}>&times;</span>
