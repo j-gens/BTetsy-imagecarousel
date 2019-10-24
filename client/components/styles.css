@@ -2,7 +2,7 @@
   position: relative;
   width: 500px;
   height: 700px;
-  right: 25%;
+  /* right: 25%; */
   margin: 0 auto;
   overflow: hidden;
   white-space: nowrap;
@@ -13,8 +13,6 @@
   transition-duration: 1s;
   transition-property: opacity;
   transition-timing-function: ease;
-  /* transition: opacity ease-in-out 0.45s;
-  transition-timing-function: ease; */
 }
 .carouselPic {
   background-size: contain;
@@ -33,7 +31,7 @@
 .displayNone {
   display: none;
 }
-.modal {
+.modalBox {
   position: fixed;
   padding-top: 100px;
   left: 0;
@@ -50,17 +48,21 @@
   position: relative;
   float: left;
 }
-.thumbnail {
+.thumbnailAfter {
   width: 60px;
   height: 60px;
+  opacity: 1;
 }
-ul li:hover {
+.thumbnailBefore {
+  width: 60px;
+  height: 60px;
+  opacity: .5;
+}
+img.thumbnailBefore:hover {
   opacity: 1;
   -webkit-animation: fadein .5s;
 }
-ul li {
-  opacity: .5;
-}
+
 @-webkit-keyframes fadein {
   from { opacity: .5; }
   to   { opacity: 1; }

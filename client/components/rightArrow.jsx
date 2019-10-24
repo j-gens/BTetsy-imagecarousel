@@ -1,9 +1,9 @@
 import React from 'react';
-import './styles.css';
+import styles from './styles.css';
 
-const RightArrow = (props) => (
-  <div className="rightArrow arrow" onClick={props.nextPicture}>
-    <i className="fa fa-angle-right fa-3x" aria-hidden="true"></i>
+const RightArrow = ({ nextPicture }) => (
+  <div role="button" tabIndex="0" aria-label="right arrow" className={`${styles.rightArrow} ${styles.arrow}`} onClick={nextPicture}>
+    <i className="fa fa-angle-right fa-3x" aria-hidden="true" />
   </div>
 );
 
