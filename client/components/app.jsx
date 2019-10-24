@@ -36,9 +36,11 @@ class App extends React.Component {
 
 
   componentDidMount() {
-    const randomNum = (max) => (Math.floor(Math.random() * max) + 1
-    );
-    const productId = randomNum(4);
+    // const randomNum = (max) => (Math.floor(Math.random() * max) + 1
+    // );
+    // const productId = randomNum(4);
+    const searchParams = new URLSearchParams(window.location.search);
+    const productId = Number(searchParams.get('productId'));
     this.setState({ productId });
     axios.get(`/products/${productId}`)
       .then((results) => {
@@ -116,7 +118,7 @@ class App extends React.Component {
     const currTNail = Number(event.target.id);
     this.setState(() => ({
       currTN: currTNail,
-    }), () => { console.log('current thumbnail', this.state.currTN); });
+    }));
   }
 
   render() {

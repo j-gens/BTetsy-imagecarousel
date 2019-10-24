@@ -7,7 +7,7 @@ models.saveProduct(3, 'New Item! BTS V Dress Shirt', ['https://btetsy.s3.us-east
 models.saveProduct(4, 'BTS V Korean Pajamas Evenie UNISEX', ['https://btetsy.s3.us-east-2.amazonaws.com/5_1.jpg', 'https://btetsy.s3.us-east-2.amazonaws.com/5_2.jpeg', 'https://btetsy.s3.us-east-2.amazonaws.com/5_3.jpg', 'https://btetsy.s3.us-east-2.amazonaws.com/5_4.jpg'], true);
 
 const productSeed = () => {
-  for (let i = 5; i < 21; i += 1) {
+  for (let i = 5; i < 101; i += 1) {
     const randomProductItem = faker.commerce.productName();
     // eslint-disable-next-line
     const randomArray = [faker.image.fashion(), faker.image.cats(), faker.image.technics(), faker.image.transport(), faker.image.abstract()];
