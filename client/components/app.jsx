@@ -39,7 +39,7 @@ class App extends React.Component {
     const searchParams = new URLSearchParams(window.location.search);
     const productId = Number(searchParams.get('productId'));
     this.setState({ productId });
-    axios.get(`/products/${productId}`)
+    axios.get(`/products/${productId || 3}`)
       .then((results) => {
         this.setState({ images: results.data[0].pictureUrl, like: results.data[0].like });
       })

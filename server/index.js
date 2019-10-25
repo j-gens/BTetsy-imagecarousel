@@ -2,7 +2,7 @@ const express = require('express');
 const parser = require('body-parser');
 const models = require('./models/index.js');
 
-const port = 3000;
+const port = 3333;
 const app = express();
 app.use(parser.json());
 
@@ -25,7 +25,6 @@ app.post('/products', (req, res) => {
 });
 // update like of productId
 app.put('/products/:productId', (req, res) => {
-  console.log('congratulations', req.params.productId);
   models.updateProduct(req.params.productId, req.body.like, (err, results) => {
     if (err) {
       res.status(404).send('Error occured updating product info');
