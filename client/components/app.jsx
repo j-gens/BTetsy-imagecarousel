@@ -160,6 +160,7 @@ class App extends React.Component {
           currIndex={currIndex}
           image={images}
         />
+        <hr />
       </div>
     );
   }
