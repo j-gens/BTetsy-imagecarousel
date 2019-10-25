@@ -24,12 +24,10 @@ class App extends React.Component {
       show: false,
       like: false,
       productId: null,
-      currTN: null,
     };
     this.nextPicture = this.nextPicture.bind(this);
     this.prevPicture = this.prevPicture.bind(this);
     this.selectedPic = this.selectedPic.bind(this);
-    this.currThumbnail = this.currThumbnail.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.toggleHeart = this.toggleHeart.bind(this);
   }
@@ -111,16 +109,9 @@ class App extends React.Component {
     }));
   }
 
-  currThumbnail(event) {
-    const currTNail = Number(event.target.id);
-    this.setState(() => ({
-      currTN: currTNail,
-    }));
-  }
-
   render() {
     const {
-      translateVal, images, like, show, currIndex, currTN,
+      translateVal, images, like, show, currIndex,
     } = this.state;
     return (
 
@@ -150,7 +141,7 @@ class App extends React.Component {
 
           <div className={styles.displayContainer}>
             <ul className={styles.pictureList} style={{ listStyleType: 'none' }}>
-              {images.map((image, index) => (<DisplayPic key={image} index={index} image={image} selectedPic={this.selectedPic} currThumbnail={this.currThumbnail} currTN={currTN} />))}
+              {images.map((image, index) => (<DisplayPic key={image} index={index} image={image} selectedPic={this.selectedPic} currIndex={currIndex} />))}
             </ul>
           </div>
         </div>
@@ -160,7 +151,7 @@ class App extends React.Component {
           currIndex={currIndex}
           image={images}
         />
-        <hr />
+        <hr className={styles.hr} />
       </div>
     );
   }
