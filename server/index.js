@@ -7,47 +7,7 @@ const app = express();
 app.use(parser.json());
 
 app.use(express.static(`${__dirname}/../dist`));
-// get the names and pics of the products
-app.get('/products', (req, res) => {
-  models.getProducts((err, data) => {
-    if (err) {
-      throw err;
-    } else {
-      res.send(data);
-    }
-  });
-});
 
-// add product name, url, username, like
-app.post('/products', (req, res) => {
-  models.saveProduct(req.body.productId, req.body.productItem, req.body.pictureUrl, req.body.like);
-  res.end('done');
-});
-// update like of productId
-app.put('/products/:productId', (req, res) => {
-  models.updateProduct(req.params.productId, req.body.like, (err, results) => {
-    if (err) {
-      res.status(404).send('Error occured updating product info');
-    }
-    res.status(200).send(results);
-  });
-});
-// getting item and username from wishlist
-app.get('/wishlists', (req, res) => {
-  models.getWishlists((err, data) => {
-    if (err) {
-      throw err;
-    } else {
-      res.send(data);
-    }
-  });
-});
-
-// adding product name and username to wishlist
-app.post('/wishlists', (req, res) => {
-  models.saveWishlist(req.body.products, req.body.username);
-  res.end('finished');
-});
 
 // get individual product item
 app.get('/products/:productId', (req, res) => {
@@ -59,17 +19,43 @@ app.get('/products/:productId', (req, res) => {
     }
   });
 });
+
+// update like of productId
+app.put('/products/:productId', (req, res) => {
+  models.updateProduct(req.params.productId, req.body.like, (err, results) => {
+    if (err) {
+      res.status(404).send('Error occured updating product info');
+    }
+    res.status(200).send(results);
+  });
+});
+
+// adding product name and username to wishlist
+app.post('/wishlist/:productId', (req, res) => {
+  models.saveWishlist(req.body.products, req.body.username);
+  res.end('finished');
+});
+
+// removing username (and products) from wishlist
+app.delete('/wishlist/:username', (req, res) => {
+  models.removeUserWishlist(req.body.username);
+  res.end('finished');
+});
+
 // getting individual wishlist
 app.get('/wishlists/:username', (req, res) => {
   models.getWishlistByUsername(req.params.username, (err, data) => {
     if (err) {
       // eslint-disable-next-line
-      console.error('this is an error in getting username of wishlists');
+      console.error('this is an error in removing item from wishlist');
+      res.send(err);
     } else {
-      res.send(data);
+      res.end('removed');
     }
   });
 });
+
+
 app.listen(port, () => {
   // eslint-disable-next-line
   console.log(`listening to ${port}`);
