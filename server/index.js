@@ -38,8 +38,14 @@ app.post('/wishlist/:username', (req, res) => {
 
 // removing username (and products) from wishlist
 app.delete('/wishlist/:username', (req, res) => {
-  models.removeUserWishlist(req.body.username);
-  res.end('finished');
+  let username = req.params.username;
+  models.removeUserWishlist(username, (err, data) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.end('finished');
+    }
+  });
 });
 
 // getting individual wishlist

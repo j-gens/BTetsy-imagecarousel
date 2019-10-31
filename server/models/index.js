@@ -63,13 +63,17 @@ const saveWishlist = async (products, username) => {
 };
 
 //remove username (and products) from wishlist
-const removeUserWishlist = (username) => {
-  MyWishlistModel.deleteOne({ username }, callback);
+const removeUserWishlist = (username, callback) => {
+  MyWishlistModel.deleteOne({ username }, (err) => {
+    callback(err);
+  });
 }
 
 // get wishlist by username
 const getWishlistByUsername = (username, callback) => {
-  MyWishlistModel.find({ username }, callback);
+  MyWishlistModel.find({ username }, (err, data) => {
+    callback(err, data);
+  });
 };
 
 module.exports.updateProduct = updateProduct;
