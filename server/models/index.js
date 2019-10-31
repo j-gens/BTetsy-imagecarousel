@@ -36,6 +36,24 @@ const saveProduct = (productId, productItem, pictureUrl, like) => {
   });
 };
 
+//==============================================//
+//==============================================//
+
+// get product by id
+const getProductById = (productId, callback) => {
+  MyProductsModel.find({ productId }, (err, docs) => {
+    callback(err, docs);
+  });
+};
+
+// update product when liked
+const updateProduct = (productId, like, callback) => {
+  MyProductsModel.updateOne({ productId }, { like }, (err, docs) => {
+    callback(err, docs);
+  });
+};
+
+// save a wishlist for a user
 const saveWishlist = async (products, username) => {
   const instance = new MyWishlistModel({
     products,
@@ -44,37 +62,20 @@ const saveWishlist = async (products, username) => {
   await instance.save();
 };
 
-const getProducts = (callback) => {
-  MyProductsModel.find({}).sort([['productId', 'ascending']]).exec((err, docs) => {
-    callback(err, docs);
-  });
-};
-const getWishlists = (callback) => {
-  MyWishlistModel.find({}, (err, docs) => {
-    callback(err, docs);
-  });
-};
-// get product by id
-const getProductById = (productId, callback) => {
-  MyProductsModel.find({ productId }, (err, docs) => {
-    callback(err, docs);
-  });
-};
+//remove username (and products) from wishlist
+const removeUserWishlist = (username) => {
+  MyWishlistModel.deleteOne({ username }, callback);
+}
+
 // get wishlist by username
 const getWishlistByUsername = (username, callback) => {
   MyWishlistModel.find({ username }, callback);
 };
-// update product when liked
-const updateProduct = (productId, like, callback) => {
-  MyProductsModel.updateOne({ productId }, { like }, (err, docs) => {
-    callback(err, docs);
-  });
-};
+
 module.exports.updateProduct = updateProduct;
 module.exports.saveProduct = saveProduct;
 module.exports.saveWishlist = saveWishlist;
-module.exports.getProducts = getProducts;
-module.exports.getWishlists = getWishlists;
 module.exports.getProductById = getProductById;
 module.exports.getWishlistByUsername = getWishlistByUsername;
 module.exports.MyWishlistModel = MyWishlistModel;
+module.exports.removeUserWishlist = removeUserWishlist;
