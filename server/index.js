@@ -31,7 +31,7 @@ app.put('/products/:productId', (req, res) => {
 });
 
 // adding product name and username to wishlist
-app.post('/wishlist/:productId', (req, res) => {
+app.post('/wishlist/:username', (req, res) => {
   models.saveWishlist(req.body.products, req.body.username);
   res.end('finished');
 });
