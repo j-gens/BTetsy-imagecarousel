@@ -1,9 +1,6 @@
 {
-  "name": "",
-  "version": "",
-  "description": "",
-  "author": "",
-  "license": "",
+  "name": "BTetsy-Photo-Carousel",
+  "version": "1.0.0",
   "engines": {
     "node": ">=6.13.0"
   },
