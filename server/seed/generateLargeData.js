@@ -34,14 +34,12 @@ function generateProductDataCsv(total, callback) {
     let ok = true;
     do {
       i--;
-      if (i === 0) {
-        productDataCsv.write(generateProductLine(), 'utf8', callback);
-      } else {
-        ok = productDataCsv.write(generateProductLine(), 'utf8');
-      }
+      ok = productDataCsv.write(generateProductLine(), 'utf8');
     } while (i > 0 && ok);
     if (i > 0) {
       productDataCsv.once('drain', write);
+    } else if (i === 0) {
+      productDataCsv.write(generateProductLine(), 'utf8', callback);
     }
   }
 }

@@ -35,14 +35,12 @@ const generateLargeImageDataCsv = (total, callback) => {
     let ok = true;
     do {
       i--;
-      if (i === 0) {
-        imageDataCsv.write(generatePhotoLine(), 'utf8', callback);
-      } else {
-        ok = imageDataCsv.write(generatePhotoLine(), 'utf8');
-      }
+      ok = imageDataCsv.write(generatePhotoLine(), 'utf8');
     } while (i > 0 && ok);
     if (i > 0) {
       imageDataCsv.once('drain', write);
+    } else if (i === 0) {
+      imageDataCsv.write(generatePhotoLine(), 'utf8', callback);
     }
   }
 }
