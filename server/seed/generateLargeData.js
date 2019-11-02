@@ -1,6 +1,5 @@
 const faker = require('faker');
 const fs = require('fs');
-const createCsvStringifier = require('csv-writer').createObjectCsvStringifier;
 
 /*
 SCHEMA:
@@ -15,27 +14,34 @@ imageUrl (string) -- faker.image.imageUrl()
 ProductId (Foreign Key - integer) -- getRandomProductId(10M)
 */
 
-const getRandomProductId = (max) => {
+const getRandomNumber = (max) => {
   return Math.ceil(Math.random() * max);
+};
+
+//create the stream to write to csv file
+const productDataCsv = fs.createWriteStream('./productData.csv', {encoding: 'utf8'})
+
+
+const generateProductDataCsv = (total) => {
+  let i = total;
+
+  const generateProductLine = () => {
+    return `${i},${faker.commerce.productName()},false\n`;
+  }
+
+  do {
+    i--;
+    productDataCsv.write(generateProductLine())
+    .on('drain', write)
+    .on('error', (err) => {
+      console.log('product csv err ', err);
+    })
+
+  } while (i > 0);
+
 }
 
 
-const productCsvWriter = createCsvWriter({
-  path: 'path here',
-  header: [
-    'productId', 'productName', 'isLiked'
-  ]
-});
-
-const imageCsvWriter = createCsvWriter({
-  path: 'path here',
-  header: [
-    'imageId', 'imageUrl', 'productId'
-  ]
-});
-
-
-
-
+generateProductDataCsv(10000000);
 
 
