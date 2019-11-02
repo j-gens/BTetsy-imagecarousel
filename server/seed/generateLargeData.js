@@ -19,29 +19,32 @@ const getRandomNumber = (max) => {
 };
 
 //create the stream to write to csv file
-const productDataCsv = fs.createWriteStream('./productData.csv', {encoding: 'utf8'})
+const productDataCsv = fs.createWriteStream('./productData.csv')
 
 
-const generateProductDataCsv = (total) => {
+function generateProductDataCsv(total, callback) {
   let i = total;
-
   const generateProductLine = () => {
     return `${i},${faker.commerce.productName()},false\n`;
   }
 
-  do {
-    i--;
-    productDataCsv.write(generateProductLine())
-    .on('drain', write)
-    .on('error', (err) => {
-      console.log('product csv err ', err);
-    })
+  write();
 
-  } while (i > 0);
-
+  function write() {
+    let ok = true;
+    do {
+      i--;
+      if (i === 0) {
+        productDataCsv.write(generateProductLine(), 'utf8', callback);
+      } else {
+        ok = productDataCsv.write(generateProductLine(), 'utf8');
+      }
+    } while (i > 0 && ok);
+    if (i > 0) {
+      productDataCsv.once('drain', write);
+    }
+  }
 }
 
-
-generateProductDataCsv(10000000);
-
+generateProductDataCsv(10000000, console.log);
 
