@@ -24,10 +24,9 @@ const imageDataCsv = fs.createWriteStream('./imageData.csv')
 
 const generateLargeImageDataCsv = (total, callback) => {
   let i = total;
-  let j = 0;
 
   const generatePhotoLine = () => {
-    return `${j},${faker.image.imageUrl()},${getRandomNumber(10000000)}\n`;
+    return `${i},${faker.image.imageUrl()},${getRandomNumber(10000000)}\n`;
   }
 
   write();
@@ -39,10 +38,7 @@ const generateLargeImageDataCsv = (total, callback) => {
       if (i === 0) {
         imageDataCsv.write(generatePhotoLine(), 'utf8', callback);
       } else {
-        for (let k = 0; k < getRandomNumber(3); k++) {
-          j++;
-          ok = imageDataCsv.write(generatePhotoLine(), 'utf8');
-        }
+        ok = imageDataCsv.write(generatePhotoLine(), 'utf8');
       }
     } while (i > 0 && ok);
     if (i > 0) {
@@ -52,5 +48,5 @@ const generateLargeImageDataCsv = (total, callback) => {
 }
 
 
-generateLargeImageDataCsv(10000000, console.log);
+generateLargeImageDataCsv(35000000, console.log);
 
