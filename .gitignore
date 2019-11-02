@@ -24,3 +24,8 @@ coverage
 build/
 dist/main.js
 
+
+
+*.csv
+
+
