@@ -24,8 +24,8 @@ coverage
 build/
 dist/main.js
 
-
-
+## added for SDC: ##
+*.env
 *.csv
 
 
