@@ -1,7 +1,5 @@
 require('dotenv').config();
-const { Client } = require('pg');
-const productData = require('../productData.csv');
-const imageData = require('../imageData.csv'));
+const { Pool } = require('pg');
 
 
 const createProductTable = `
@@ -19,7 +17,7 @@ CREATE TABLE IF NOT EXISTS product_images (
 );
 `;
 
-const client = new Client({
+const pool = new Pool({
   user: process.env.PG_USER,
   host: process.env.PG_HOST,
   database: process.env.PG_DATABASE,
@@ -27,7 +25,31 @@ const client = new Client({
   port: process.env.PG_PORT
 });
 
-await client.connect()
+(async() => {
+  const client = await pool.connect()
+
+  try {
+    await client.query(`BEGIN`)
+    await client.query(createProductTable)
+    await client.query(createImageTable)
+    await client.query(`COMMIT`)
+  } catch(error) {
+    await client.query(`ROLLBACK`)
+    throw error
+  } finally {
+    client.release()
+  }
+})().catch(error => console.log(error.stack))
 
 
+module.exports = {
+  query: (text, params, callback) => {
+    const start = Date.now();
+    return pool.query(text, params, (err, results) => {
+      const duration = Date.now() - start;
+      console.log('executed query', { text, duration, rows: results.rowCount });
+      callback(err, results);
+    })
+  }
+}
 
