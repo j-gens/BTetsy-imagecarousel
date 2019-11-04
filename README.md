@@ -1,39 +1,31 @@
 # Project Name
 
-> Project description
+BTetsy
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  - https://github.com/hrr41-SDC-havarti/BTetsy-JG-Proxy
 
 ## Table of Contents
 
 1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
+2. [Requirements](#requirements)
+3. [Development](#development)
 
 ## Usage
 
-> Some usage instructions
+To generate product data (10M entries) run:
+node server/seed/generateLargeData.js
+
+To generate image data (35M entries) run:
+node server/seed/generateLargeImageData.js
+
+To load both product and image data to PostgreSQL run:
+node server/database/postgres.js
 
 ## Requirements
 
-An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
-
-- Node 6.13.0
-- etc
-
 ## Development
 
-### Installing Dependencies
 
-From within the root directory:
-
-```sh
-npm install -g webpack
-npm install
-```
 
