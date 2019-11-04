@@ -15,7 +15,7 @@ ProductId (Foreign Key - integer) -- getRandomProductId(10M)
 */
 
 const getRandomNumber = (max) => {
-  return Math.ceil(Math.random() * max);
+  return Math.floor(Math.random() * max);
 };
 
 //create the streams to write to csv files
@@ -36,7 +36,7 @@ const generateLargeImageDataCsv = (total, callback) => {
     do {
       i--;
       ok = imageDataCsv.write(generatePhotoLine(), 'utf8');
-    } while (i > 0 && ok);
+    } while (i > 1 && ok);
     if (i > 0) {
       imageDataCsv.once('drain', write);
     } else if (i === 0) {
