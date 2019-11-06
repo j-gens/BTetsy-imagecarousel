@@ -4,6 +4,16 @@ const fs = require('fs');
 const copyFrom = require('pg-copy-streams').from;
 
 
+//log-in information kept in .env file
+const pool = new Pool({
+  user: process.env.PG_USER,
+  host: process.env.PG_HOST,
+  database: process.env.PG_DATABASE,
+  password: process.env.PG_PASSWORD,
+  port: process.env.PG_PORT
+});
+
+//scripts to create the products table and product_images table
 const createProductTable = `
 CREATE TABLE IF NOT EXISTS products (
   productId integer UNIQUE PRIMARY KEY,
@@ -19,6 +29,7 @@ CREATE TABLE IF NOT EXISTS product_images (
 );
 `;
 
+//scripts to upload data from csv files to respective tables
 const uploadProductData = `
 COPY products (productId, productName, isLiked)
   FROM STDIN
@@ -30,24 +41,8 @@ COPY product_images (imageId, imageUrl, productId)
   WITH DELIMITER ',';
 `;
 
-// const updateImageTable = `
-// ALTER TABLE product_images
-//   ADD CONSTRAINT fk_products
-//   FOREIGN KEY (productId)
-//   REFERENCES products (productId);
-// `;
-
-const pool = new Pool({
-  user: process.env.PG_USER,
-  host: process.env.PG_HOST,
-  database: process.env.PG_DATABASE,
-  password: process.env.PG_PASSWORD,
-  port: process.env.PG_PORT
-});
-
 (async() => {
   const client = await pool.connect()
-
   try {
     await client.query(`BEGIN`)
     //create the tables in db after connection
@@ -61,13 +56,13 @@ const pool = new Pool({
     const iStream = client.query(copyFrom(uploadImageData));
     const iFileStream = fs.createReadStream('imageData.csv')
     await iFileStream.pipe(iStream);
-
+    //commit all changes
     await client.query(`COMMIT`)
-
+    //error handling
   } catch(error) {
     await client.query(`ROLLBACK`)
     throw error
-
+    //release client back into pool
   } finally {
     client.release()
   }
