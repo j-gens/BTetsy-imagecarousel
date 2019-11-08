@@ -15,13 +15,13 @@ BTetsy
 ## Usage
 
 To generate product data (10M entries) run:
-node server/database/generateLargeData.js
+node server/database/seed/generateLargeData.js
 
 To generate image data (35M entries) run:
-node server/database/generateLargeImageData.js
+node server/database/seed/generateLargeImageData.js
 
 To load both product and image data to PostgreSQL run:
-node server/database/postgres.js
+node server/database/seed-postgresql.js
 
 ## Requirements
 
