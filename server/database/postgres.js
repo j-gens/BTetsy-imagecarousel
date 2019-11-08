@@ -18,12 +18,13 @@ const createProductTable = `
 CREATE TABLE IF NOT EXISTS products (
   productId integer UNIQUE PRIMARY KEY,
   productName text,
+  sellerName text,
   isLiked boolean
 );
 `;
 const createImageTable = `
 CREATE TABLE IF NOT EXISTS product_images (
-  imageId integer UNIQUE PRIMARY KEY,
+  imageId integer UNIQUE,
   imageUrl text,
   productId integer
 );
