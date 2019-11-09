@@ -1,8 +1,7 @@
 require('dotenv').config();
-const pool = require('../index.js');
+const { Pool } = require('pg');
 const fs = require('fs');
 const copyFrom = require('pg-copy-streams').from;
-
 
 //log-in information kept in .env file
 const pool = new Pool({
@@ -18,7 +17,6 @@ const createProductTable = `
 CREATE TABLE IF NOT EXISTS products (
   productId integer UNIQUE PRIMARY KEY,
   productName text,
-  sellerName text,
   isLiked boolean
 );
 `;
@@ -26,7 +24,7 @@ const createImageTable = `
 CREATE TABLE IF NOT EXISTS product_images (
   imageId integer UNIQUE,
   imageUrl text,
-  productId integer REFERENCES products (productId)
+  productId integer
 );
 `;
 //scripts to upload data from csv files to respective tables
@@ -41,9 +39,15 @@ FROM STDIN
 WITH DELIMITER ',';
 `;
 //script to set up the index on the product_images table
-const createIndex = `
+const createImageIndex = `
 CREATE INDEX product_images_fkey_index
   ON product_images (productId);
+`;
+//script to set up the foreign key on the product_images table
+const createImageForeignKey = `
+ALTER TABLE product_images
+  ADD CONSTRAINT product_images_fkey
+  FOREIGN KEY (productId) REFERENCES products (productId) ON DELETE CASCADE;
 `;
 
 (async() => {
@@ -61,9 +65,10 @@ CREATE INDEX product_images_fkey_index
     const iStream = client.query(copyFrom(uploadImageData));
     const iFileStream = fs.createReadStream('imageData.csv')
     await iFileStream.pipe(iStream);
-    //create the index on the fkey column
-    //done after data load b/c faster than before data load
-    await client.query(createIndex);
+    //index the productId column
+    await client.query(createImageIndex);
+    //add a foreign key constraint
+    await client.query(createImageForeignKey);
     //commit all changes
     await client.query(`COMMIT`)
     //error handling
@@ -73,6 +78,11 @@ CREATE INDEX product_images_fkey_index
     //release client back into pool
   } finally {
     client.release()
+    //close the pool once seeding is done
+    pool.end().then(() => {
+      //eslint-disable-next-line
+      console.log('complete - thanks for waiting!')
+    })
   }
 })().catch(error => console.log(error.stack))
 

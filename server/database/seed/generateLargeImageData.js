@@ -19,7 +19,7 @@ const getRandomNumber = (max) => {
 };
 
 const getRandomPhotoUrl = () => {
-  return 'https://hrr41-sdc-havarti-jg.s3-us-west-2.amazonaws.com/' + getRandomNumber(100).toString();
+  return "https://hrr41-sdc-havarti-jg.s3-us-west-2.amazonaws.com/" + getRandomNumber(100).toString();
 }
 
 //create the stream to write to csv file
