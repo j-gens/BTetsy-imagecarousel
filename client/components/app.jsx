@@ -32,14 +32,21 @@ class App extends React.Component {
     this.toggleHeart = this.toggleHeart.bind(this);
   }
 
+  addUrlsToArray(data) {
+    let images = [];
+    for (let i = 0; i < data.length; i++) {
+      images.push(data[i].imageurl);
+    }
+    return images;
+  }
 
   componentDidMount() {
     const searchParams = new URLSearchParams(window.location.search);
     const productId = Number(searchParams.get('productId'));
     this.setState({ productId });
-    axios.get(`/products/${productId || 3}`)
+    axios.get(`/products/${productId || 0}`)
       .then((results) => {
-        this.setState({ images: results.data[0].pictureUrl, like: results.data[0].like });
+        this.setState({ images: this.addUrlsToArray(results.data), like: results.data[0].isliked });
       })
       .catch((error) => {
         // eslint-disable-next-line
@@ -55,10 +62,7 @@ class App extends React.Component {
   async toggleHeart() {
     const { productId } = this.state;
     await this.setState((state) => ({ like: !state.like }));
-    axios.put(`/products/${productId}`, {
-      // eslint-disable-next-line
-      like: this.state.like,
-    })
+    axios.patch(`/products/${productId}`)
       .then((response) => {
         // eslint-disable-next-line
         console.log(response);
