@@ -1,69 +1,58 @@
 const express = require('express');
-const parser = require('body-parser');
-const models = require('./models/index.js');
+const db = require('./database/index.js');
 
 const port = 3333;
 const app = express();
-app.use(parser.json());
+
+app.use(express.json())
+app.use(express.urlencoded({extended: true}));
 
 app.use(express.static(`${__dirname}/../dist`));
 
 
-// get individual product item
+//get individual product item images
 app.get('/products/:productId', (req, res) => {
-  models.getProductById(req.params.productId, (err, data) => {
+  db.getProductQuery([req.params.productId], (err, data) => {
     if (err) {
-      throw err;
+      res.status(500).send(err);
     } else {
-      res.send(data);
+      res.status(200).send(data.rows);
     }
   });
 });
 
-// update like of productId
-app.put('/products/:productId', (req, res) => {
-  models.updateProduct(req.params.productId, req.body.like, (err, results) => {
+//update like of productId
+app.patch('/products/:productId', (req, res) => {
+  db.updateIsLikedQuery([req.params.productId], (err, data) => {
     if (err) {
-      res.status(404).send('Error occured updating product info');
+      res.status(500).send(err);
     }
-    res.status(200).send(results);
+    res.status(200).send(data.rowCount.toString());
   });
 });
 
-// adding product name and username to wishlist
-app.post('/wishlist/:username', (req, res) => {
-  models.saveWishlist(req.body.products, req.body.username);
-  res.end('finished');
-});
-
-// removing username (and products) from wishlist
-app.delete('/wishlist/:username', (req, res) => {
-  let username = req.params.username;
-  models.removeUserWishlist(username, (err, data) => {
+// removing a product from the db
+app.delete('/products/:productId', (req, res) => {
+  db.removeProductQuery([req.params.productId], (err, data) => {
     if (err) {
-      res.send(err);
-    } else {
-      res.end('finished');
+      res.status(500).send(err);
     }
-  });
-});
+    res.status(200).send(data.rowCount.toString());
+  })
+})
 
-// getting individual wishlist
-app.get('/wishlists/:username', (req, res) => {
-  models.getWishlistByUsername(req.params.username, (err, data) => {
+//adding a product to the db (sent via url-endcoded form data)
+app.post('/products', (req, res) => {
+  db.addProductQuery([req.body.productId, req.body.productName, req.body.isLiked], (err, data) => {
     if (err) {
-      // eslint-disable-next-line
-      console.error('this is an error in removing item from wishlist');
-      res.send(err);
-    } else {
-      res.end('removed');
+      res.status(500).send(err);
     }
-  });
-});
-
+    res.status(200).send(data.rowCount.toString());
+  })
+})
 
 app.listen(port, () => {
-  // eslint-disable-next-line
+  //eslint-disable-next-line
   console.log(`listening to ${port}`);
 });
 module.exports.app = app;
