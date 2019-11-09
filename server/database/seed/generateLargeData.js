@@ -32,7 +32,7 @@ const productDataCsv = fs.createWriteStream('./productData.csv')
 function generateProductDataCsv(total) {
   let i = total;
   const generateProductLine = () => {
-    return `${i},${faker.commerce.productName()},${faker.internet.userName()},${getIfLiked()}\n`;
+    return `${i},${faker.commerce.productName()},${getIfLiked()}\n`;
   }
 
   write();
