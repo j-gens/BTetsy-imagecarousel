@@ -8,21 +8,25 @@ const pool = new Pool({
   database: process.env.PG_DATABASE,
   password: process.env.PG_PASSWORD,
   port: process.env.PG_PORT
-});
+})
+
+module.exports = {
+  getProductQuery: (productId, callback) => {
+    return pool.query(`SELECT * FROM products INNER JOIN product_images ON products.productId = product_images.productId WHERE products.productId = ?;`, productId, callback)
+  },
+
+  updateIsLikedQuery: (productId, callback) => {
+    return pool.query(`UPDATE products SET isLiked = NOT isLiked WHERE productId = ?;`, productId, callback)
+  },
+
+  removeProductQuery: (productId, callback) => {
+    return pool.query(`DELETE FROM products WHERE productId = ?`, productId, callback)
+  }
+
+  addProductQuery: (params, callback) => {
+    return pool.query(`INSERT INTO products (productId, productName, isLiked) VALUES (?, ?, ?)`, params, callback)
+  },
+}
 
 
-
-
-// module.exports = {
-//   query: (text, params, callback) => {
-//     const start = Date.now();
-//     return pool.query(text, params, (err, results) => {
-//       const duration = Date.now() - start;
-//       console.log('executed query', { text, duration, rows: results.rowCount });
-//       callback(err, results);
-//     })
-//   }
-// }
-
-module.exports.pool = pool;
 
