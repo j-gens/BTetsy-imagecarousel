@@ -1,7 +1,9 @@
+require('newrelic');
+require('dotenv').config();
 const express = require('express');
 const db = require('./database/index.js');
 
-const port = 3333;
+const port = process.env.PORT;
 const app = express();
 
 app.use(express.json())
@@ -11,8 +13,8 @@ app.use(express.static(`${__dirname}/../dist`));
 
 
 //get individual product item images
-app.get('/products/:productId', (req, res) => {
-  db.getProductQuery([req.params.productId], (err, data) => {
+app.get('/products/:productid', (req, res) => {
+  db.getProductQuery([req.params.productid], (err, data) => {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -22,7 +24,7 @@ app.get('/products/:productId', (req, res) => {
 });
 
 //update like of productId
-app.patch('/products/:productId', (req, res) => {
+app.patch('/products/:productid', (req, res) => {
   db.updateIsLikedQuery([req.params.productId], (err, data) => {
     if (err) {
       res.status(500).send(err);
@@ -32,7 +34,7 @@ app.patch('/products/:productId', (req, res) => {
 });
 
 // removing a product from the db
-app.delete('/products/:productId', (req, res) => {
+app.delete('/products/:productid', (req, res) => {
   db.removeProductQuery([req.params.productId], (err, data) => {
     if (err) {
       res.status(500).send(err);
@@ -55,4 +57,4 @@ app.listen(port, () => {
   //eslint-disable-next-line
   console.log(`listening to ${port}`);
 });
-module.exports.app = app;
+
