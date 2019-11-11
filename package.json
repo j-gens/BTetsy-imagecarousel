@@ -16,6 +16,7 @@
     "express": "^4.17.1",
     "faker": "^4.1.0",
     "fs": "0.0.1-security",
+    "newrelic": "^6.1.0",
     "pg": "^7.12.1",
     "pg-copy-streams": "^2.2.2",
     "react": "^16.11.0",
