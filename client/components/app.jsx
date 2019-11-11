@@ -42,10 +42,12 @@ class App extends React.Component {
 
   componentDidMount() {
     const searchParams = new URLSearchParams(window.location.search);
-    const productId = Number(searchParams.get('productId'));
+    const productId = Number(searchParams.get('productid'));
+    console.log(productId)
     this.setState({ productId });
     axios.get(`/products/${productId || 0}`)
       .then((results) => {
+        console.log(results)
         this.setState({ images: this.addUrlsToArray(results.data), like: results.data[0].isliked });
       })
       .catch((error) => {
