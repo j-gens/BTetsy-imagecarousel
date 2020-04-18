@@ -47,7 +47,8 @@ function generateProductDataCsv(total) {
       productDataCsv.once('drain', write);
     }
     if (i === 0) {
-      console.log('complete');
+      console.log('part 1 complete');
+      return;
     }
   }
 }

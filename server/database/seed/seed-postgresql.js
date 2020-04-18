@@ -55,12 +55,12 @@ ALTER TABLE product_images
   try {
     await client.query(`BEGIN`)
     //create the tables in db after connection
-    await client.query(createProductTable)
+    //await client.query(createProductTable)
     await client.query(createImageTable)
     //copy in the product data from the csv files
-    const stream = client.query(copyFrom(uploadProductData));
-    const fileStream = fs.createReadStream('productData.csv')
-    await fileStream.pipe(stream);
+    //const stream = client.query(copyFrom(uploadProductData));
+    //const fileStream = fs.createReadStream('productData.csv')
+    //await fileStream.pipe(stream);
     //copy in the image data from the csv files
     const iStream = client.query(copyFrom(uploadImageData));
     const iFileStream = fs.createReadStream('imageData.csv')
@@ -81,7 +81,8 @@ ALTER TABLE product_images
     //close the pool once seeding is done
     pool.end().then(() => {
       //eslint-disable-next-line
-      console.log('complete - thanks for waiting!')
+      console.log('all parts complete - thanks for waiting!')
+      return;
     })
   }
 })().catch(error => console.log(error.stack))

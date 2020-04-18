@@ -18,8 +18,11 @@ const getRandomNumber = (max) => {
   return Math.floor(Math.random() * max);
 };
 
-const getRandomPhotoUrl = () => {
-  return "https://hrr41-sdc-havarti-jg.s3-us-west-2.amazonaws.com/" + getRandomNumber(100).toString();
+const distributePhotos = (i) => {
+  if (i < 10000000) {
+    return i;
+  }
+  return getRandomNumber(10000000);
 }
 
 //create the stream to write to csv file
@@ -28,7 +31,7 @@ const imageDataCsv = fs.createWriteStream('./imageData.csv')
 const generateLargeImageDataCsv = (total) => {
   let i = total;
   const generatePhotoLine = () => {
-    return `${i},${getRandomPhotoUrl()},${getRandomNumber(10000000)}\n`;
+    return `${i},${getRandomNumber(100).toString()},${distributePhotos(i)}\n`;
   }
 
   write();
@@ -43,7 +46,8 @@ const generateLargeImageDataCsv = (total) => {
       imageDataCsv.once('drain', write);
     }
     if (i === 0) {
-      console.log('complete');
+      console.log('part 2 complete');
+      return;
     }
   }
 }
