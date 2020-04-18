@@ -54,7 +54,7 @@ cd BTetsy-carousel-service
 npm install
 ```
 4. Generate the data and seed the PostgreSQL database
-> This command will generate a product data (10M entries) csv file and an image data (35M entries) csv file before uploading both to the database
+> This command will generate product data (10M entries) and image data (35M entries)
 ```
 npm run-script seed
 ```
