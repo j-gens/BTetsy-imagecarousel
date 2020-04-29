@@ -5,6 +5,8 @@
 * [Getting Started](https://github.com/j-gens/BTetsy-imagecarousel#getting-started)
 * [License](https://github.com/j-gens/BTetsy-imagecarousel#license)
 
+![alt arts and crafts](https://j-gens-portfolio.s3-us-west-1.amazonaws.com/weware-gen.jpg)
+
 ## Overview
 
 E-commerce app for handmade goods and wares.
