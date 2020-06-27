@@ -1,15 +1,16 @@
-# Craft Marketplace App: Photo Carousel Service
+# weWare
+## Craft Marketplace App
 
-* [Overview](https://github.com/j-gens/BTetsy-imagecarousel#overview)
-* [Technologies](https://github.com/j-gens/BTetsy-imagecarousel#technologies)
-* [Getting Started](https://github.com/j-gens/BTetsy-imagecarousel#getting-started)
-* [License](https://github.com/j-gens/BTetsy-imagecarousel#license)
+* [Overview](https://github.com/j-gens/craft-marketplace-app#overview)
+* [Technologies](https://github.com/j-gens/craft-marketplace-app#technologies)
+* [Getting Started](https://github.com/j-gens/craft-marketplace-app#getting-started)
+* [License](https://github.com/j-gens/craft-marketplace-app#license)
 
 ![alt arts and crafts](https://j-gens-portfolio.s3-us-west-1.amazonaws.com/weware-gen.jpg)
 
 ## Overview
 
-E-commerce app for handmade goods and wares.
+E-commerce app for homemade goods and wares.
 
 #### Team Members
 
@@ -45,11 +46,11 @@ These instructions will get you a copy of the project up and running on your loc
 
 1. Clone the repository onto your local machine
 ```
-$ git clone https://github.com/j-gens/BTetsy-carousel-service.git
+$ git clone https://github.com/j-gens/craft-marketplace-app.git
 ```
-2. Change directories into the BTetsy-carousel-service root directory
+2. Change directories into the craft-marketplace-app root directory
 ```
-cd BTetsy-carousel-service
+cd craft-marketplace-app
 ```
 3. Install the dependencies in a local node_modules folder
 ```
@@ -73,4 +74,4 @@ npm start
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/j-gens/BTetsy-imagecarousel/blob/master/LICENSE) file for details
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/j-gens/craft-marketplace-app/blob/master/LICENSE) file for details
