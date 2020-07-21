@@ -4,6 +4,7 @@
 * [Overview](https://github.com/j-gens/craft-marketplace-app#overview)
 * [Technologies](https://github.com/j-gens/craft-marketplace-app#technologies)
 * [Getting Started](https://github.com/j-gens/craft-marketplace-app#getting-started)
+* [Performance Testing](https://github.com/j-gens/craft-marketplace-app#performance-testing)
 * [License](https://github.com/j-gens/craft-marketplace-app#license)
 
 ![alt arts and crafts](https://j-gens-portfolio.s3-us-west-1.amazonaws.com/weware-gen.jpg)
@@ -50,27 +51,58 @@ $ git clone https://github.com/j-gens/craft-marketplace-app.git
 ```
 2. Change directories into the craft-marketplace-app root directory
 ```
-cd craft-marketplace-app
+$ cd craft-marketplace-app
 ```
 3. Install the dependencies in a local node_modules folder
 ```
-npm install
+$ npm install
 ```
 4. Generate the data and seed the PostgreSQL database
 > This command will generate product data (10M entries) and image data (35M entries)
 ```
-npm run-script seed
+$ npm run-script seed
 ```
 5. Assemble the bundle within the public folder
 ```
-npm run-script build
+$ npm run-script build
 ```
 6. Start the server on your local machine
 ```
-npm start
+$ npm start
 ```
 7. View in browser by going to [http://localhost:3000](http://localhost:3000)
 
+#### Testing
+
+The legacy tests were written using Jest.  Run them with the following command:
+
+```
+$ npm run-script test
+```
+## Performance Testing
+
+Local performance testing was done with k6 as the load testing tool.
+
+Below is one of the k6 results printout from testing.  Things to note:
+
+* __vus__ = active virtual users (with __vus_max__ being the maximum possible number of virtual users)
+  * _For the test below, the __vus_max__ was set to 1000_
+* __http_reqs__ = the total number of HTTP requests that k6 generated
+  * _For the test below, the __http_reqs__ was 1173/s_
+* __http_req_duration__ = the total time for the request (how long the server took to process the request and respond)
+  * _For the test below, the __http_req_duration__ was an average of 129ms and max of 1.22s_
+
+![alt k6 test](https://j-gens-portfolio.s3-us-west-1.amazonaws.com/weware-k6.png)
+
+Performance testing of the deployed app was done with loader.io as the cloud-based load testing tool.
+
+Below is a loader.io results printout from testing 100 requests per second.
+
+![alt 100 rps test](https://j-gens-portfolio.s3-us-west-1.amazonaws.com/weware-proxy-100rps.png)
+
+Below is a second loader.io results printout from testing 1000 requests per second.
+
+![alt 1000 rps test](https://j-gens-portfolio.s3-us-west-1.amazonaws.com/weware-proxy-1000rps.png)
 
 ## License
 
