@@ -9,7 +9,8 @@
     "build:dev": "webpack -d --watch",
     "seed": "node server/database/seed/generateLargeData.js && node server/database/seed/generateLargeImageData.js && node server/database/seed-postgresql.js",
     "start": "node server/index.js",
-    "start:dev": "nodemon server/index.js"
+    "start:dev": "nodemon server/index.js",
+    "test": "jest"
   },
   "license": "MIT",
   "dependencies": {
