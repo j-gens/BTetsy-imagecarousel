@@ -92,17 +92,17 @@ Below is one of the k6 results printout from testing.  Things to note:
 * __http_req_duration__ = the total time for the request (how long the server took to process the request and respond)
   * _For the test below, the __http_req_duration__ was an average of 129ms and max of 1.22s_
 
-![alt k6 test](https://github.com/j-gens/craft-marketplace-app/blob/master/weware-k6.jpg?raw=true)
+![alt k6 test](https://github.com/j-gens/craft-marketplace-app/blob/master/weware-k6.png?raw=true)
 
 Performance testing of the deployed app was done with loader.io as the cloud-based load testing tool.
 
 Below is a loader.io results printout from testing 100 requests per second.
 
-![alt 100 rps test](https://github.com/j-gens/craft-marketplace-app/blob/master/weware-proxy-100rps.jpg?raw=true)
+![alt 100 rps test](https://github.com/j-gens/craft-marketplace-app/blob/master/weware-proxy-100rps.png?raw=true)
 
 Below is a second loader.io results printout from testing 1000 requests per second.
 
-![alt 1000 rps test](https://github.com/j-gens/craft-marketplace-app/blob/master/weware-proxy-1000rps.jpg?raw=true)
+![alt 1000 rps test](https://github.com/j-gens/craft-marketplace-app/blob/master/weware-proxy-1000rps.png?raw=true)
 
 ## License
 
