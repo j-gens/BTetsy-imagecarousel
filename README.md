@@ -7,7 +7,7 @@
 * [Performance Testing](https://github.com/j-gens/craft-marketplace-app#performance-testing)
 * [License](https://github.com/j-gens/craft-marketplace-app#license)
 
-![alt arts and crafts](https://j-gens-portfolio.s3-us-west-1.amazonaws.com/weware-gen.jpg)
+![alt arts and crafts](https://github.com/j-gens/craft-marketplace-app/blob/master/weware-gen.jpg?raw=true)
 
 ## Overview
 
@@ -92,17 +92,17 @@ Below is one of the k6 results printout from testing.  Things to note:
 * __http_req_duration__ = the total time for the request (how long the server took to process the request and respond)
   * _For the test below, the __http_req_duration__ was an average of 129ms and max of 1.22s_
 
-![alt k6 test](https://j-gens-portfolio.s3-us-west-1.amazonaws.com/weware-k6.png)
+![alt k6 test](https://github.com/j-gens/craft-marketplace-app/blob/master/weware-k6.jpg?raw=true)
 
 Performance testing of the deployed app was done with loader.io as the cloud-based load testing tool.
 
 Below is a loader.io results printout from testing 100 requests per second.
 
-![alt 100 rps test](https://j-gens-portfolio.s3-us-west-1.amazonaws.com/weware-proxy-100rps.png)
+![alt 100 rps test](https://github.com/j-gens/craft-marketplace-app/blob/master/weware-proxy-100rps.jpg?raw=true)
 
 Below is a second loader.io results printout from testing 1000 requests per second.
 
-![alt 1000 rps test](https://j-gens-portfolio.s3-us-west-1.amazonaws.com/weware-proxy-1000rps.png)
+![alt 1000 rps test](https://github.com/j-gens/craft-marketplace-app/blob/master/weware-proxy-1000rps.jpg?raw=true)
 
 ## License
 
